@@ -1,0 +1,19 @@
+﻿{
+  "player": [
+    {
+      "DataId": 10000,
+      "PrefabLabel": "Player",
+      "Level": 1,
+      "Exp": 0.0,
+      "MaxHp": 10.0,
+      "HP": 10.0,
+      "HpRate": 2.0,
+      "Atk": 5.0,
+      "AtkRate": 2.0,
+      "Def": 2.0,
+      "DefRate": 1.0,
+      "MoveSpeed": 3.0,
+      "SkillIDList": []
+    }
+  ]
+}

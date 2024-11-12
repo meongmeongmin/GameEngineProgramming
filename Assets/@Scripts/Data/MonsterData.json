@@ -1,0 +1,20 @@
+﻿{
+  "monsters": [
+    {
+      "DropExp": 1,
+      "DataId": 10000,
+      "PrefabLabel": "Slime",
+      "Level": 1,
+      "Exp": 0.0,
+      "MaxHp": 7.0,
+      "HP": 7.0,
+      "HpRate": 2.0,
+      "Atk": 3.0,
+      "AtkRate": 2.0,
+      "Def": 1.0,
+      "DefRate": 1.0,
+      "MoveSpeed": 3.0,
+      "SkillIDList": []
+    }
+  ]
+}
