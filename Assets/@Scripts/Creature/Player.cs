@@ -3,38 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
-public class Player : MonoBehaviour
+public class Player : Creature
 {
-    public float Speed { get; } = 3.0f;
-
-    ECreatureState _state = ECreatureState.Idle;
-    public ECreatureState State
-    {
-        get { return _state; }
-        protected set
-        { 
-            if (_state != value)
-            {
-                _state = value;
-                UpdateAnimation();
-            }
-        }
-    }
-
-    EDir _dir = EDir.Down;
-    public EDir Dir 
-    {
-        get { return _dir; }
-        protected set 
-        {
-            if (_dir != value)
-            {
-                _dir = value;
-                State = ECreatureState.Move;
-            }
-        }
-    }
-
     Vector2 _axis;
     public Vector2 Axis // 입력 키 방향
     {
@@ -48,15 +18,9 @@ public class Player : MonoBehaviour
 
     float _angle = -90.0f;
 
-    Rigidbody2D _rigidBody;
-    Animator _animator;
-
-    void Start()
+    public override void Init()
     {
-        _rigidBody = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
-
-        State = ECreatureState.Idle;
+        base.Init();
     }
 
     void Update()
@@ -88,44 +52,6 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         _rigidBody.velocity = Axis * Speed;
-    }
-
-    void UpdateAnimation()
-    {
-        switch (State)
-        {
-            case ECreatureState.Idle:
-                break;
-            case ECreatureState.Move:
-                UpdateMoveAnimation();
-                State = ECreatureState.Idle;
-                break;
-            case ECreatureState.Skill:
-                break;
-            case ECreatureState.OnDamaged:
-                break;
-            case ECreatureState.Dead:
-                break;
-        }
-    }
-
-    void UpdateMoveAnimation()
-    {
-        switch (Dir)
-        {
-            case EDir.Up:
-                _animator.Play("Up");
-                break;
-            case EDir.Left:
-                _animator.Play("Left");
-                break;
-            case EDir.Down:
-                _animator.Play("Down");
-                break;
-            case EDir.Right:
-                _animator.Play("Right");
-                break;
-        }
     }
 
     float GetAngle(Vector2 fromPos, Vector2 toPos)
