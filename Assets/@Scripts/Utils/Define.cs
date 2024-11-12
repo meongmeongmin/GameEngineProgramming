@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Define
 {
+    public enum EScene
+    {
+        None,
+        LobbyScene,
+        GameScene,
+    }
+
     public enum EDir
     {
         Up,
