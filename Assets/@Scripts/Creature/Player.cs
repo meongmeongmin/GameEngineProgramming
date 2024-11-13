@@ -58,7 +58,7 @@ public class Player : Creature
 
     void FixedUpdate()
     {
-        _rigidBody.velocity = Axis * MoveSpeed;
+        RigidBody.velocity = Axis * MoveSpeed;
     }
 
     float GetAngle(Vector2 fromPos, Vector2 toPos)
