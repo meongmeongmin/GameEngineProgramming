@@ -5,7 +5,21 @@ using static Define;
 
 public class Creature : MonoBehaviour
 {
-    public float Speed { get; protected set; } = 3.0f;
+    public EObjectType ObjectType { get; protected set; }
+
+    public int DataID { get; set; }
+    public Data.CreatureData CreatureData { get; protected set; }
+
+    public int Level { get; protected set; }
+    public float Exp { get; protected set; }
+
+    #region Stat
+    public float MaxHp { get; protected set; }
+    public float Hp { get; protected set; }
+    public float Atk { get; protected set; }
+    public float Def { get; protected set; }
+    public float MoveSpeed { get; protected set; }
+    #endregion
 
     ECreatureState _state = ECreatureState.Idle;
     public ECreatureState State
@@ -47,6 +61,29 @@ public class Creature : MonoBehaviour
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+
+        State = ECreatureState.Idle;
+    }
+
+    public virtual void SetInfo(int dataID)
+    {
+        DataID = dataID;
+
+        if (ObjectType == EObjectType.Player)
+            CreatureData = Managers.Data.PlayerDataDic[dataID];
+        else if (ObjectType == EObjectType.Monster)
+            CreatureData = Managers.Data.MonsterDataDic[dataID];
+
+        gameObject.name = CreatureData.PrefabLabel;
+
+        // Stat
+        MaxHp = CreatureData.MaxHp;
+        Hp = CreatureData.MaxHp;
+        Atk = CreatureData.Atk;
+        Def = CreatureData.Def;
+        MoveSpeed = CreatureData.MoveSpeed;
+
+        // TODO: Skill
 
         State = ECreatureState.Idle;
     }

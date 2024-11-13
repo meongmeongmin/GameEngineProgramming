@@ -6,7 +6,7 @@ using static Define;
 public class Player : Creature
 {
     Vector2 _axis;
-    public Vector2 Axis // ÀÔ·Â Å° ¹æÇâ
+    public Vector2 Axis // ìž…ë ¥ í‚¤ ë°©í–¥
     {
         get { return _axis; }
         protected set
@@ -21,6 +21,13 @@ public class Player : Creature
     public override void Init()
     {
         base.Init();
+
+        ObjectType = EObjectType.Player;
+    }
+
+    public override void SetInfo(int dataID)
+    {
+        base.SetInfo(dataID);
     }
 
     void Update()
@@ -51,7 +58,7 @@ public class Player : Creature
 
     void FixedUpdate()
     {
-        _rigidBody.velocity = Axis * Speed;
+        _rigidBody.velocity = Axis * MoveSpeed;
     }
 
     float GetAngle(Vector2 fromPos, Vector2 toPos)

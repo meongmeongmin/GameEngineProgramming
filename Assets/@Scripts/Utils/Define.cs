@@ -11,6 +11,13 @@ public class Define
         GameScene,
     }
 
+    public enum EObjectType
+    {
+        None,
+        Player,
+        Monster,
+    }
+
     public enum EDir
     {
         Up,
@@ -27,4 +34,6 @@ public class Define
         OnDamaged,
         Dead,
     }
+
+    public const int PLAYER_ID = 10000;
 }
