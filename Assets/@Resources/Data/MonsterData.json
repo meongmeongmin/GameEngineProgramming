@@ -1,8 +1,8 @@
-﻿{
+{
   "monsters": [
     {
       "DropExp": 1,
-      "DataId": 10000,
+      "DataId": 10001,
       "PrefabLabel": "Slime",
       "Level": 1,
       "Exp": 0.0,

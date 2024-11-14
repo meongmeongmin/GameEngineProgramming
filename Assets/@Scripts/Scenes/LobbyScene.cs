@@ -22,14 +22,14 @@ public class LobbyScene : BaseScene
             if (count == totalCount)
             {
                 Managers.Data.Init();
-                Invoke("LoadDungeonScene", 1.0f);    // 씬 전환 Test
+                Invoke("LoadIslandScene", 1.0f);    // 씬 전환 Test
             }
         });
     }
 
-    void LoadDungeonScene()    // 씬 전환 Test
+    void LoadIslandScene()    // 씬 전환 Test
     {
-        Managers.Scene.LoadScene(EScene.DungeonScene);
+        Managers.Scene.LoadScene(EScene.IslandScene);
     }
 
     public override void Clear()
