@@ -12,7 +12,10 @@ public class Player : Creature
         protected set
         {
             if (_axis == value)
-                _axis = value;
+                return;
+
+            _axis = value;
+            State = _axis == Vector2.zero ? ECreatureState.Idle : ECreatureState.Move;
         }
     }
 
@@ -32,28 +35,24 @@ public class Player : Creature
 
     void Update()
     {
-        if (State == ECreatureState.Idle)
-        {
-            float axisH = Input.GetAxisRaw("Horizontal");
-            float axisV = Input.GetAxisRaw("Vertical");
-            _axis = new Vector2(axisH, axisV);
+        float axisH = Input.GetAxisRaw("Horizontal");
+        float axisV = Input.GetAxisRaw("Vertical");
+        Axis = new Vector2(axisH, axisV);
 
-            if (_axis != Vector2.zero)
-            {
-                Vector2 fromPos = transform.position;
-                Vector2 toPos = new Vector2(fromPos.x + Axis.x, fromPos.y + Axis.y);
-                _angle = GetAngle(fromPos, toPos);
+        // 이동 각도 구하기
+        Vector2 fromPos = transform.position;
+        Vector2 toPos = new Vector2(fromPos.x + Axis.x, fromPos.y + Axis.y);
+        _angle = GetAngle(fromPos, toPos);
 
-                if (_angle >= 45 && _angle <= 135)
-                    Dir = EDir.Up;
-                else if (_angle > 135 || _angle < -135)
-                    Dir = EDir.Left;
-                else if (_angle >= -135 && _angle <= -45)
-                    Dir = EDir.Down;
-                else if (_angle >= -45 && _angle < 45)
-                    Dir = EDir.Right;
-            }
-        }
+        // 방향 구하기
+        if (_angle >= 45 && _angle <= 135)
+            Dir = EDir.Up;
+        else if (_angle > 135 || _angle < -135)
+            Dir = EDir.Left;
+        else if (_angle >= -135 && _angle <= -45)
+            Dir = EDir.Down;
+        else if (_angle >= -45 && _angle < 45)
+            Dir = EDir.Right;
     }
 
     void FixedUpdate()
@@ -66,8 +65,8 @@ public class Player : Creature
         float angle = 0;
         if (Axis.x != 0 || Axis.y != 0)
         {
-            Vector2 destPos = new Vector2(toPos.x - fromPos.x, toPos.y - fromPos.y);
-            float radian = Mathf.Atan2(destPos.y, destPos.x);
+            Vector2 deltaPos = new Vector2(toPos.x - fromPos.x, toPos.y - fromPos.y);
+            float radian = Mathf.Atan2(deltaPos.y, deltaPos.x);
             angle = radian * Mathf.Rad2Deg;
         }
         else

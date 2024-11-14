@@ -52,7 +52,7 @@ public class Creature : MonoBehaviour
             if (_dir != value)
             {
                 _dir = value;
-                State = ECreatureState.Move;
+                UpdateAnimation();
             }
         }
     }
@@ -99,10 +99,10 @@ public class Creature : MonoBehaviour
         switch (State)
         {
             case ECreatureState.Idle:
+                UpdateIdleAnimation();
                 break;
             case ECreatureState.Move:
                 UpdateMoveAnimation();
-                State = ECreatureState.Idle;
                 break;
             case ECreatureState.Skill:
                 break;
@@ -113,21 +113,40 @@ public class Creature : MonoBehaviour
         }
     }
 
+    protected void UpdateIdleAnimation()
+    {
+        switch (Dir)
+        {
+            case EDir.Up:
+                _animator.Play("Idle_Up");
+                break;
+            case EDir.Left:
+                _animator.Play("Idle_Left");
+                break;
+            case EDir.Down:
+                _animator.Play("Idle_Down");
+                break;
+            case EDir.Right:
+                _animator.Play("Idle_Right");
+                break;
+        }
+    }
+
     protected void UpdateMoveAnimation()
     {
         switch (Dir)
         {
             case EDir.Up:
-                _animator.Play("Up");
+                _animator.Play("Walk_Up");
                 break;
             case EDir.Left:
-                _animator.Play("Left");
+                _animator.Play("Walk_Left");
                 break;
             case EDir.Down:
-                _animator.Play("Down");
+                _animator.Play("Walk_Down");
                 break;
             case EDir.Right:
-                _animator.Play("Right");
+                _animator.Play("Walk_Right");
                 break;
         }
     }
