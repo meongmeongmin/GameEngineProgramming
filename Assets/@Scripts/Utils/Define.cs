@@ -9,6 +9,7 @@ public class Define
         None,
         LobbyScene,
         IslandScene,
+        DungeonScene
     }
 
     public enum EObjectType
