@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 929945431}
   - component: {fileID: 929945432}
   m_Layer: 0
-  m_Name: '@GameScene'
+  m_Name: '@IslandScene'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

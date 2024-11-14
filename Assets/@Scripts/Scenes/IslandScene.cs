@@ -4,13 +4,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static Define;
 
-public class GameScene : BaseScene
+public class IslandScene : BaseScene
 {
     public override void Init()
     {
         base.Init();
 
-        Scene = EScene.GameScene;
+        Scene = EScene.IslandScene;
 
         Player player = Managers.Object.Spawn<Player>(Vector3.zero, PLAYER_ID);
         CameraController camera = Camera.main.GetOrAddComponent<CameraController>();
