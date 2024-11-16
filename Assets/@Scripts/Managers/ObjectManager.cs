@@ -11,7 +11,7 @@ public class ObjectManager
     public HashSet<Player> Player { get; } = new HashSet<Player>();
     // TODO: 몬스터
 
-    public T Spawn<T>(Vector3 position, int dataID) where T : Creature
+    public T Spawn<T>(Vector3 position, int dataID) where T : BaseObject
     {
         string prefabName = typeof(T).Name;
 
@@ -19,7 +19,7 @@ public class ObjectManager
         go.name = prefabName;
         go.transform.position = position;
 
-        Creature obj = go.GetComponent<Creature>();
+        BaseObject obj = go.GetComponent<BaseObject>();
 
         if (obj.ObjectType == EObjectType.Player)
         {
@@ -35,7 +35,7 @@ public class ObjectManager
         return obj as T;
     }
 
-    public void Despawn<T>(T obj) where T : Creature
+    public void Despawn<T>(T obj) where T : BaseObject
     {
         EObjectType objectType = obj.ObjectType;
 

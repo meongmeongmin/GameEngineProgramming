@@ -50,6 +50,8 @@ public class Creature : BaseObject
 
     public override bool Init()
     {
+        base.Init();
+
         _animator = GetComponent<Animator>();
         State = ECreatureState.Idle;
 
