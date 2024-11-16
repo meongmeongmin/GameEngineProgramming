@@ -7,9 +7,6 @@ using UnityEngine.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-
-
-
 #if UNITY_EDITOR
 using Newtonsoft.Json;
 using UnityEditor;

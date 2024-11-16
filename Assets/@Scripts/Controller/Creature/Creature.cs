@@ -3,16 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
-public class Creature : MonoBehaviour
+public class Creature : BaseObject
 {
-    public EObjectType ObjectType { get; protected set; }
-
-    public Rigidbody2D RigidBody { get; private set; }
-    public CircleCollider2D Collider { get; private set; }
-
-    public float ColliderRadius { get { return Collider != null ? Collider.radius : 0.0f; } }
-    public Vector3 CenterPosition { get { return transform.position + Vector3.up * ColliderRadius; } }
-
     protected Animator _animator;
 
     public int DataID { get; set; }
@@ -57,18 +49,12 @@ public class Creature : MonoBehaviour
         }
     }
 
-    void Awake()
+    public override bool Init()
     {
-        Init();
-    }
-
-    public virtual void Init()
-    {
-        RigidBody = GetComponent<Rigidbody2D>();
-        Collider = GetComponent<CircleCollider2D>();
         _animator = GetComponent<Animator>();
-
         State = ECreatureState.Idle;
+
+        return true;
     }
 
     public virtual void SetInfo(int dataID)
