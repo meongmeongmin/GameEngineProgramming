@@ -12,6 +12,8 @@ public class IslandScene : BaseScene
 
         Scene = EScene.IslandScene;
 
+        Managers.Map.LoadMap("00_island");
+
         Player player = Managers.Object.Spawn<Player>(Vector3.zero, PLAYER_ID);
         CameraController camera = Camera.main.GetOrAddComponent<CameraController>();
         camera.Target = player;
