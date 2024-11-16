@@ -3,6 +3,7 @@
     {
       "DataId": 10000,
       "PrefabLabel": "Player",
+      "SpriteName": "Player_0",
       "Level": 1,
       "Exp": 0.0,
       "MaxHp": 10.0,

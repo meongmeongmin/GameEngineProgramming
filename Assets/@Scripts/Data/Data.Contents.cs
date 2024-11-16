@@ -30,6 +30,7 @@ namespace Data
     {
         public int DataID;
         public string PrefabLabel;
+        public string SpriteName;
         public int Level;
         public float Exp;
         public float MaxHp;
@@ -88,6 +89,28 @@ namespace Data
             Dictionary<int, MonsterData> dict = new Dictionary<int, MonsterData>();
             foreach (MonsterData monster in monsters)
                 dict.Add(monster.DataID, monster);
+            return dict;
+        }
+    }
+
+    [Serializable]
+    public class TileData
+    {
+        public int DataID;
+        public string Name;
+        public Define.EObjectType ObjectType;
+        public string SpriteName;
+    }
+
+    [Serializable]
+    public class TileDataLoader : ILoader<int, TileData>
+    {
+        public List<TileData> tiles = new List<TileData>();
+        public Dictionary<int, TileData> MakeDict()
+        {
+            Dictionary<int, TileData> dict = new Dictionary<int, TileData>();
+            foreach (TileData tile in tiles)
+                dict.Add(tile.DataID, tile);
             return dict;
         }
     }

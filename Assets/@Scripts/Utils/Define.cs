@@ -17,6 +17,7 @@ public class Define
         None,
         Player,
         Monster,
+        Exit,
     }
 
     public enum EDir
