@@ -7,7 +7,6 @@ public class Creature : BaseObject
 {
     protected Animator _animator;
 
-    public int DataID { get; set; }
     public Data.CreatureData CreatureData { get; protected set; }
 
     public int Level { get; protected set; }

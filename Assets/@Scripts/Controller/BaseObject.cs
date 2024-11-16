@@ -12,6 +12,8 @@ public class BaseObject : MonoBehaviour
     
     public Vector3 CenterPosition { get { return transform.position + Vector3.up * ColliderRadius; } }
 
+    public int DataID { get; set; }
+
     bool _init = false;
 
     void Awake()

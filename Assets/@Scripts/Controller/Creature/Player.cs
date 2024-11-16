@@ -21,11 +21,13 @@ public class Player : Creature
 
     float _angle = -90.0f;
 
-    public override void Init()
+    public override bool Init()
     {
         base.Init();
 
         ObjectType = EObjectType.Player;
+
+        return true;
     }
 
     public override void SetInfo(int dataID)
