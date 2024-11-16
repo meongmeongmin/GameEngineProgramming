@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2260112066309570344}
   - component: {fileID: 2959371010437759810}
   m_Layer: 0
-  m_Name: Tilemap_Object
+  m_Name: Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 5357036328000644475}
   - component: {fileID: 6227314445625623689}
   m_Layer: 0
-  m_Name: 00_island
+  m_Name: IslandMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

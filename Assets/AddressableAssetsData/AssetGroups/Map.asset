@@ -18,13 +18,13 @@ MonoBehaviour:
   m_GUID: 34332b8050d7593448034c022a423761
   m_SerializeEntries:
   - m_GUID: e20aae3f2c5b78a4b9961cafc1486497
-    m_Address: 00_island
+    m_Address: IslandMap
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 33ece0c83bf112243af45393ade2ad34
-    m_Address: 01_dungeon
+    m_Address: DungeonMap
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
