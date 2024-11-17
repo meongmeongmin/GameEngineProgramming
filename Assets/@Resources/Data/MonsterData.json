@@ -2,7 +2,7 @@
   "monsters": [
     {
       "DropExp": 1,
-      "DataId": 10001,
+      "DataID": 10001,
       "PrefabLabel": "Slime",
       "SpriteName": "Slime_9",
       "Level": 1,

@@ -1,7 +1,7 @@
 {
   "player": [
     {
-      "DataId": 10000,
+      "DataID": 10000,
       "PrefabLabel": "Player",
       "SpriteName": "Player_0",
       "Level": 1,

@@ -1,7 +1,7 @@
 {
   "tiles": [
     {
-      "DataId": 20001,
+      "DataID": 20001,
       "Name": "Exit",
       "ObjectType": 3,
       "SpriteName": "TileMap_9"
