@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-using Unity.VisualScripting;
 using UnityEngine;
 using static Define;
-using static Unity.Burst.Intrinsics.X86.Avx;
 
 public class ObjectManager
 {
     public HashSet<Player> Player { get; } = new HashSet<Player>();
+    public HashSet<Projectile> Projectiles { get; } = new HashSet<Projectile>();
     // TODO: 몬스터
 
     public T Spawn<T>(Vector3Int cellPos, int dataID) where T : BaseObject
@@ -37,6 +36,12 @@ public class ObjectManager
         {
             // TODO: 몬스터
         }
+        else if (obj.ObjectType == EObjectType.Projectile)
+        {
+            Projectile projectile = go.GetComponent<Projectile>();
+            Projectiles.Add(projectile);
+            projectile.SetInfo(dataID);
+        }
 
         return obj as T;
     }
@@ -53,6 +58,11 @@ public class ObjectManager
         else if (obj.ObjectType == EObjectType.Monster)
         {
             // TODO: 몬스터
+        }
+        else if (obj.ObjectType == EObjectType.Projectile)
+        {
+            Projectile projectile = obj.GetComponent<Projectile>();
+            Projectiles.Remove(projectile);
         }
 
         Managers.Resource.Destroy(obj.gameObject);

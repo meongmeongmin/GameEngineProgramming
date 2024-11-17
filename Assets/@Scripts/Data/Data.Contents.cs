@@ -114,4 +114,55 @@ namespace Data
             return dict;
         }
     }
+
+    [Serializable]
+    public class SkillData
+    {
+        public int DataID;
+        public string Name;
+        public int ProjectileId;
+		public string PrefabLabel;
+        public string AnimName;
+        public float DamageMultiplier;
+        public float CoolTime;
+    }
+
+    [Serializable]
+    public class SkillDataLoader : ILoader<int, SkillData>
+    {
+        public List<SkillData> skills = new List<SkillData>();
+        public Dictionary<int, SkillData> MakeDict()
+        {
+            Dictionary<int, SkillData> dict = new Dictionary<int, SkillData>();
+            foreach (SkillData skill in skills)
+                dict.Add(skill.DataID, skill);
+            return dict;
+        }
+    }
+
+    [Serializable]
+    public class ProjectileData
+    {
+        public int DataID;
+        public string Name;
+        public string MotionComponentName;
+        public string ProjectileSpriteName;
+        public string PrefabLabel;
+        public float Duration;
+        public float ProjSpeed;
+    }
+
+    [Serializable]
+    public class ProjectileDataLoader : ILoader<int, ProjectileData>
+    {
+        public List<ProjectileData> projectiles = new List<ProjectileData>();
+
+        public Dictionary<int, ProjectileData> MakeDict()
+        {
+            Dictionary<int, ProjectileData> dict = new Dictionary<int, ProjectileData>();
+            foreach (ProjectileData projectile in projectiles)
+                dict.Add(projectile.DataID, projectile);
+            return dict;
+        }
+    }
 }

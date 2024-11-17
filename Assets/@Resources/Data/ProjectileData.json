@@ -1,0 +1,13 @@
+{
+  "projectiles": [
+    {
+      "DataID": 40001,
+      "Name": "Arrow",
+      "MotionComponentName": "StraightMotion",
+      "ProjectileSpriteName": "Player_10",
+      "PrefabLabel": "Arrow",
+      "Duration": 2.0,
+      "ProjSpeed": 5.0
+    }
+  ]
+}

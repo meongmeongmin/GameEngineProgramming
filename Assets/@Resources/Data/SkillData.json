@@ -1,0 +1,22 @@
+{
+  "skills": [
+    {
+      "DataID": 30001,
+      "Name": "NormalAttack",
+      "ProjectileId": 0,
+      "PrefabLabel": null,
+      "AnimName": "Attack",
+      "DamageMultiplier": 1.0,
+      "CoolTime": 0.0
+    },
+    {
+      "DataID": 30011,
+      "Name": "ArrowShoot",
+      "ProjectileId": 30001,
+      "PrefabLabel": "Bow",
+      "AnimName": "Attack",
+      "DamageMultiplier": 1.0,
+      "CoolTime": 0.0
+    }
+  ]
+}

@@ -19,6 +19,7 @@ public class Define
         Monster,
         Exit,
         Waypoint,
+        Projectile,
     }
 
     public enum EDir
