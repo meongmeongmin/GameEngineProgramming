@@ -238,6 +238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5357036328000644475}
   - component: {fileID: 6227314445625623689}
+  - component: {fileID: 6294842310109274158}
   m_Layer: 0
   m_Name: IslandMap
   m_TagString: Untagged
@@ -275,6 +276,20 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!114 &6294842310109274158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504812937171103348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74dfa7f4eeb935a4fa0e5906f063bb00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Stages:
+  - {fileID: 6290550642488855985}
 --- !u!1 &7301643922691963808
 GameObject:
   m_ObjectHideFlags: 0
@@ -3661,6 +3676,7 @@ GameObject:
   - component: {fileID: 7268001084962616995}
   - component: {fileID: 2187966801940303377}
   - component: {fileID: 4912575779440534316}
+  - component: {fileID: 6290550642488855985}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -5972,6 +5988,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: 0, y: 1, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 7
+      m_TileSpriteIndex: 8
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 1, y: 1, z: 0}
     second:
       serializedVersion: 2
@@ -7538,7 +7564,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: b86c5ab74ba4fed44a67015b05166210, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: bc0062c76a0fdb2439f641eaa9f04434, type: 2}
-  - m_RefCount: 3
+  - m_RefCount: 4
     m_Data: {fileID: 11400000, guid: be43b5c3942f4f54ab9f66d131c7ce43, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 3cf8ec1d7a99960418f90419d1d35e18, type: 2}
@@ -7571,7 +7597,7 @@ Tilemap:
     m_Data: {fileID: -1026348096, guid: d36d9f8568980c040845e3481bb0f1a5, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 942787543, guid: d36d9f8568980c040845e3481bb0f1a5, type: 3}
-  - m_RefCount: 3
+  - m_RefCount: 4
     m_Data: {fileID: -194845117, guid: d36d9f8568980c040845e3481bb0f1a5, type: 3}
   - m_RefCount: 4
     m_Data: {fileID: -513311808, guid: d36d9f8568980c040845e3481bb0f1a5, type: 3}
@@ -7586,7 +7612,7 @@ Tilemap:
   - m_RefCount: 18
     m_Data: {fileID: 1097328027, guid: d36d9f8568980c040845e3481bb0f1a5, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 381
+  - m_RefCount: 382
     m_Data:
       e00: 1
       e01: 0
@@ -7623,7 +7649,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 383
+  - m_RefCount: 384
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -7698,3 +7724,19 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!114 &6290550642488855985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8123317442541973756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 882ba64d4e868a0448ba3ebbaedf2871, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnObjects: []
+  TilemapObject: {fileID: 2260112066309570344}
+  Tilemap: {fileID: 2187966801940303377}
+  IsActive: 0

@@ -8,6 +8,8 @@ public class MapManager
     public string MapName { get; private set; }
     public Grid CellGrid { get; private set; }
 
+    public StageTransition StageTransition;
+
     public Vector3Int WorldToCell(Vector3 worldPos) { return CellGrid.WorldToCell(worldPos); }
     public Vector3 CellToWorld(Vector3Int cellPos) { return CellGrid.CellToWorld(cellPos); }
 
@@ -18,6 +20,8 @@ public class MapManager
         GameObject map = Managers.Resource.Instantiate(mapName);
         map.transform.position = Vector3.zero;
         map.name = $"@Map_{mapName}";
+
+        StageTransition = map.GetComponent<StageTransition>();
 
         Map = map;
         MapName = mapName;

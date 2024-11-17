@@ -18,6 +18,7 @@ public class Define
         Player,
         Monster,
         Exit,
+        Waypoint,
     }
 
     public enum EDir

@@ -10,15 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Character
+  m_Name: Object
   m_EditorClassIdentifier: 
-  m_GroupName: Character
+  m_GroupName: Object
   m_Data:
     m_SerializedData: []
   m_GUID: b41fd91d4a3389d43b8ede2c2afacdef
   m_SerializeEntries:
   - m_GUID: 455d3a19c1d8e894fa5d21ec43a95cb6
     m_Address: Player
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf0595159d7a69043b4c35d95f7338c1
+    m_Address: Exit
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

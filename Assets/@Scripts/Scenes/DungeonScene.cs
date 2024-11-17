@@ -13,6 +13,7 @@ public class DungeonScene : BaseScene
         Scene = EScene.DungeonScene;
 
         Managers.Map.LoadMap("DungeonMap");
+        Managers.Map.StageTransition.SetInfo();
 
         //Player player = Managers.Object.Spawn<Player>(new Vector3(-0.5f, -4.5f), PLAYER_ID);
         //CameraController camera = Camera.main.GetOrAddComponent<CameraController>();

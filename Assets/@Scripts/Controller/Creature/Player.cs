@@ -60,6 +60,7 @@ public class Player : Creature
     void FixedUpdate()
     {
         RigidBody.velocity = Axis * MoveSpeed;
+        Managers.Map.StageTransition.CheckMapChanged(transform.position);
     }
 
     float GetAngle(Vector2 fromPos, Vector2 toPos)

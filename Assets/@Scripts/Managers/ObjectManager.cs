@@ -11,6 +11,12 @@ public class ObjectManager
     public HashSet<Player> Player { get; } = new HashSet<Player>();
     // TODO: 몬스터
 
+    public T Spawn<T>(Vector3Int cellPos, int dataID) where T : BaseObject
+    {
+        Vector3 position = Managers.Map.CellToWorld(cellPos);
+        return Spawn<T>(position, dataID);
+    }
+
     public T Spawn<T>(Vector3 position, int dataID) where T : BaseObject
     {
         string prefabName = typeof(T).Name;
