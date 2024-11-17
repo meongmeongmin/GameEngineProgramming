@@ -15,9 +15,9 @@ public class DungeonScene : BaseScene
         Managers.Map.LoadMap("DungeonMap");
         Managers.Map.StageTransition.SetInfo();
 
-        //Player player = Managers.Object.Spawn<Player>(new Vector3(-0.5f, -4.5f), PLAYER_ID);
-        //CameraController camera = Camera.main.GetOrAddComponent<CameraController>();
-        //camera.Target = player;
+        Player player = Managers.Object.Spawn<Player>(new Vector3(-0.5f, -4.5f), PLAYER_ID);
+        CameraController camera = Camera.main.GetOrAddComponent<CameraController>();
+        camera.Target = player;
     }
 
     public override void Clear()
