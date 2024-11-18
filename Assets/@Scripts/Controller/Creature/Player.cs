@@ -55,6 +55,12 @@ public class Player : Creature
             Dir = EDir.Down;
         else if (_angle >= -45 && _angle < 45)
             Dir = EDir.Right;
+
+        // 스킬 사용
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Skills.DefaultSkill.DoSkill();
+        }
     }
 
     void FixedUpdate()

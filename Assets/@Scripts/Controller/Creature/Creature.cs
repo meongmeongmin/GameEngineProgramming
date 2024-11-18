@@ -8,6 +8,7 @@ public class Creature : BaseObject
     protected Animator _animator;
 
     public Data.CreatureData CreatureData { get; protected set; }
+    public SkillComponent Skills { get; protected set; }
 
     public int Level { get; protected set; }
     public float Exp { get; protected set; }
@@ -24,7 +25,7 @@ public class Creature : BaseObject
     public ECreatureState State
     {
         get { return _state; }
-        protected set
+        set
         {
             if (_state != value)
             {
@@ -76,9 +77,16 @@ public class Creature : BaseObject
         Def = CreatureData.Def;
         MoveSpeed = CreatureData.MoveSpeed;
 
-        // TODO: Skill
+        // Skill
+        Skills = gameObject.GetComponent<SkillComponent>();
+        Skills.SetInfo(this);
 
         State = ECreatureState.Idle;
+    }
+
+    public override void OnDamaged(Creature owner, SkillBase skill)
+    {
+        base.OnDamaged(owner, skill);
     }
 
     protected void UpdateAnimation()
@@ -92,6 +100,7 @@ public class Creature : BaseObject
                 UpdateMoveAnimation();
                 break;
             case ECreatureState.Skill:
+                UpdateSkillAnimation();
                 break;
             case ECreatureState.OnDamaged:
                 break;
@@ -137,4 +146,11 @@ public class Creature : BaseObject
                 break;
         }
     }
+
+    protected void UpdateSkillAnimation()
+    {
+        switch (Dir)
+        {
+            case EDir.Up:
+                _animator.Play("Attak_Up");
 }

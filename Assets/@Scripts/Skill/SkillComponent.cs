@@ -1,0 +1,53 @@
+using Data;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class SkillComponent : MonoBehaviour
+{
+    public List<SkillBase> SkillList { get; } = new List<SkillBase>();
+    public SkillBase DefaultSkill { get; private set; }
+
+    Creature _owner;
+
+    void Awake()
+    {
+        Init();
+    }
+
+    public void Init()
+    {
+
+    }
+
+    public void SetInfo(Creature owner)
+    {
+        _owner = owner;
+        foreach (int skillID in owner.CreatureData.SkillIDList)
+            AddSkill(skillID);
+    }
+
+    public void AddSkill(int skillID)
+    {
+        if (skillID == 0)
+            return;
+
+        if (Managers.Data.SkillDataDic.TryGetValue(skillID, out var data) == false)
+        {
+            Debug.LogWarning($"AddSkill 실패 {skillID}");
+            return;
+        }
+
+        SkillBase skill = gameObject.AddComponent(Type.GetType(data.Name)) as SkillBase;
+        if (skill == null)
+            return;
+
+        skill.SetInfo(_owner, skillID);
+        SkillList.Add(skill);
+
+        if (skillID == 30001)
+            DefaultSkill = skill;
+    }
+}

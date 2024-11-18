@@ -32,4 +32,9 @@ public class BaseObject : MonoBehaviour
         _init = true;
         return true;
     }
+
+    public virtual void OnDamaged(Creature owner, SkillBase skill)
+    {
+
+    }
 }
