@@ -14,7 +14,10 @@
       "Def": 2.0,
       "DefRate": 1.0,
       "MoveSpeed": 3.0,
-      "SkillIDList": []
+      "SkillIDList": [
+        30001,
+        30011
+      ]
     }
   ]
 }

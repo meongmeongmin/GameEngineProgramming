@@ -120,10 +120,11 @@ namespace Data
     {
         public int DataID;
         public string Name;
-        public int ProjectileId;
+        public int ProjectileID;
 		public string PrefabLabel;
         public string AnimName;
         public float DamageMultiplier;
+        public float Range;
         public float CoolTime;
     }
 
