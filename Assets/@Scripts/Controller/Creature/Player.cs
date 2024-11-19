@@ -5,17 +5,14 @@ using static Define;
 
 public class Player : Creature
 {
-    Vector2 _axis;
-    public Vector2 Axis // 입력 키 방향
+    Vector2 _axis;  // 입력한 방향키
+    public Vector2 Axis
     {
         get { return _axis; }
-        protected set
-        {
-            if (_axis == value)
-                return;
-
-            _axis = value;
-            State = _axis == Vector2.zero ? ECreatureState.Idle : ECreatureState.Move;
+        set 
+        { 
+            if (_axis != value)
+                _axis = value; 
         }
     }
 
@@ -26,7 +23,6 @@ public class Player : Creature
         base.Init();
 
         ObjectType = EObjectType.Player;
-
         return true;
     }
 
@@ -37,36 +33,43 @@ public class Player : Creature
 
     void Update()
     {
-        float axisH = Input.GetAxisRaw("Horizontal");
-        float axisV = Input.GetAxisRaw("Vertical");
-        Axis = new Vector2(axisH, axisV);
-
-        // 이동 각도 구하기
-        Vector2 fromPos = transform.position;
-        Vector2 toPos = new Vector2(fromPos.x + Axis.x, fromPos.y + Axis.y);
-        _angle = GetAngle(fromPos, toPos);
-
-        // 방향 구하기
-        if (_angle >= 45 && _angle <= 135)
-            Dir = EDir.Up;
-        else if (_angle > 135 || _angle < -135)
-            Dir = EDir.Left;
-        else if (_angle >= -135 && _angle <= -45)
-            Dir = EDir.Down;
-        else if (_angle >= -45 && _angle < 45)
-            Dir = EDir.Right;
-
-        // 스킬 사용
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Skills.DefaultSkill.DoSkill();
-        }
+        GetDirInput();
+        GetSkillInput();
     }
 
     void FixedUpdate()
     {
         RigidBody.velocity = Axis * MoveSpeed;
         Managers.Map.StageTransition.CheckMapChanged(transform.position);
+    }
+
+    void GetDirInput()
+    {
+        float axisH = Input.GetAxisRaw("Horizontal");
+        float axisV = Input.GetAxisRaw("Vertical");
+        Axis = new Vector2(axisH, axisV);
+
+        if (Axis != Vector2.zero)   // 방향키 입력 감지
+        {
+            // 이동 각도 구하기
+            Vector2 fromPos = transform.position;
+            Vector2 toPos = fromPos + Axis;
+            _angle = GetAngle(fromPos, toPos);
+
+            // 방향 구하기
+            if (_angle >= 45 && _angle <= 135)
+                Dir = EDir.Up;
+            else if (_angle > 135 || _angle < -135)
+                Dir = EDir.Left;
+            else if (_angle >= -135 && _angle <= -45)
+                Dir = EDir.Down;
+            else if (_angle >= -45 && _angle < 45)
+                Dir = EDir.Right;
+
+            State = ECreatureState.Move;
+        }
+        else if (State == ECreatureState.Move)
+            State = ECreatureState.Idle;
     }
 
     float GetAngle(Vector2 fromPos, Vector2 toPos)
@@ -82,5 +85,13 @@ public class Player : Creature
             angle = _angle;
 
         return angle;
+    }
+
+    void GetSkillInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+            Skills.DefaultSkill.DoSkill();
+        else if (State == ECreatureState.Skill)
+            State = ECreatureState.Idle;
     }
 }

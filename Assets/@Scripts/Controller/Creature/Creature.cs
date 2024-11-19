@@ -21,7 +21,9 @@ public class Creature : BaseObject
     public float MoveSpeed { get; protected set; }
     #endregion
 
+    [SerializeField]
     ECreatureState _state = ECreatureState.Idle;
+    
     public ECreatureState State
     {
         get { return _state; }
@@ -153,4 +155,16 @@ public class Creature : BaseObject
         {
             case EDir.Up:
                 _animator.Play("Attak_Up");
+                break;
+            case EDir.Left:
+                _animator.Play("Attak_Left");
+                break;
+            case EDir.Down:
+                _animator.Play("Attak_Down");
+                break;
+            case EDir.Right:
+                _animator.Play("Attak_Right");
+                break;
+        }
+    }
 }

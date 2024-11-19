@@ -17,6 +17,7 @@ public class SkillBase : MonoBehaviour
 
     public virtual void DoSkill()
     {
+        Debug.Log("DoSkill");
         Owner.State = ECreatureState.Skill;
     }
 

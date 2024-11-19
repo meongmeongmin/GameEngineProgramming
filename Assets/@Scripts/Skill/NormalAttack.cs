@@ -23,7 +23,7 @@ public class NormalAttack : SkillBase
         if (owner == null)
             return;
 
-        Vector3 dir = Util.DirToVector3(Owner.Dir);
+        Vector3 ownerDir = Util.DirToVector3(Owner.Dir);
         Collider2D[] hitTargets = Physics2D.OverlapCircleAll(Owner.transform.position, Data.Range);
 
         foreach (Collider2D target in hitTargets)
@@ -33,10 +33,10 @@ public class NormalAttack : SkillBase
                 continue;
 
             // Owner와 target 사이의 방향 벡터 계산
-            Vector3 toTarget = (target.transform.position - Owner.transform.position).normalized;
+            Vector3 skillDir = (target.transform.position - Owner.transform.position).normalized;
 
-            // 방향과 타겟의 각도 계산
-            float angle = Vector3.Angle(dir, toTarget);
+            // 오너가 바라보는 방향과 타겟 방향의 각도 계산
+            float angle = Vector3.Angle(ownerDir, skillDir);
 
             // 부채꼴 범위 안에 있는지 확인
             if (angle <= _angle / 2)
