@@ -6,8 +6,8 @@
       "MotionComponentName": "StraightMotion",
       "ProjectileSpriteName": "Player_10",
       "PrefabLabel": "Arrow",
-      "Duration": 2.0,
-      "ProjSpeed": 5.0
+      "Duration": 1.0,
+      "ProjSpeed": 10.0
     }
   ]
 }

@@ -9,6 +9,7 @@ public class SkillComponent : MonoBehaviour
 {
     public List<SkillBase> SkillList { get; } = new List<SkillBase>();
     public SkillBase DefaultSkill { get; private set; }
+    public SkillBase AuxiliarySkill { get; private set; }
 
     Creature _owner;
 
@@ -47,7 +48,10 @@ public class SkillComponent : MonoBehaviour
         skill.SetInfo(_owner, skillID);
         SkillList.Add(skill);
 
+        // 기본값
         if (skillID == 30001)
             DefaultSkill = skill;
+        else if (skillID == 30011)
+            AuxiliarySkill = skill;
     }
 }

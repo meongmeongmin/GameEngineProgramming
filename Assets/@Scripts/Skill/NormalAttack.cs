@@ -15,13 +15,14 @@ public class NormalAttack : SkillBase
         base.SetInfo(owner, skillID);
     }
 
-    public override void DoSkill()
+    public override bool DoSkill()
     {
-        base.DoSkill();
+        if (base.DoSkill() == false)
+            return false;
 
         Player owner = Owner as Player;
         if (owner == null)
-            return;
+            return false;
 
         Vector3 ownerDir = Util.DirToVector3(Owner.Dir);
         Collider2D[] hitTargets = Physics2D.OverlapCircleAll(Owner.transform.position, Data.Range);
@@ -45,5 +46,7 @@ public class NormalAttack : SkillBase
                 creature.OnDamaged(Owner, this);
             }
         }
+
+        return true;
     }
 }

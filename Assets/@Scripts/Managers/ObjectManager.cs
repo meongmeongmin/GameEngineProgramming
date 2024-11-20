@@ -16,9 +16,9 @@ public class ObjectManager
         return Spawn<T>(position, dataID);
     }
 
-    public T Spawn<T>(Vector3 position, int dataID) where T : BaseObject
+    public T Spawn<T>(Vector3 position, int dataID, string name = null) where T : BaseObject
     {
-        string prefabName = typeof(T).Name;
+        string prefabName = string.IsNullOrWhiteSpace(name) ? typeof(T).Name : name;
 
         GameObject go = Managers.Resource.Instantiate(prefabName);
         go.name = prefabName;

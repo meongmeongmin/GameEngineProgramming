@@ -91,6 +91,8 @@ public class Player : Creature
     {
         if (Input.GetKeyDown(KeyCode.Z))
             Skills.DefaultSkill.DoSkill();
+        else if (Input.GetKeyDown(KeyCode.X))
+            Skills.AuxiliarySkill.DoSkill();
         else if (State == ECreatureState.Skill)
             State = ECreatureState.Idle;
     }

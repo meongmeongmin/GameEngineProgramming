@@ -3,7 +3,7 @@
     {
       "DataID": 30001,
       "Name": "NormalAttack",
-      "ProjectileId": 0,
+      "ProjectileID": 0,
       "PrefabLabel": "",
       "AnimName": "Attack",
       "DamageMultiplier": 1.0,
@@ -13,12 +13,12 @@
     {
       "DataID": 30011,
       "Name": "ArrowShoot",
-      "ProjectileId": 40001,
-      "PrefabLabel": "Bow",
+      "ProjectileID": 40001,
+      "PrefabLabel": "Arrow",
       "AnimName": "Attack",
       "DamageMultiplier": 1.0,
       "Range": 0.0,
-      "CoolTime": 0.0
+      "CoolTime": 0.5
     }
   ]
 }
