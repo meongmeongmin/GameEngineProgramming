@@ -6,7 +6,7 @@
       "ProjectileID": 0,
       "PrefabLabel": "",
       "AnimName": "Attack",
-      "DamageMultiplier": 1.0,
+      "DamageMultiplier": 1.5,
       "Range": 2.0,
       "CoolTime": 0.0
     },
