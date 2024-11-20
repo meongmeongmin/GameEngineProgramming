@@ -31,15 +31,25 @@ public class Player : Creature
         base.SetInfo(dataID);
     }
 
+    public override void OnDead()
+    {
+        base.OnDead();
+        // TODO: 플레이어 사망 처리
+    }
+
     void Update()
     {
+        if (State == ECreatureState.Dead)
+            return;
+
         GetDirInput();
         GetSkillInput();
     }
 
     void FixedUpdate()
     {
-        RigidBody.velocity = Axis * MoveSpeed;
+        //RigidBody.velocity = Axis * MoveSpeed;
+        transform.position += (Vector3)Axis * MoveSpeed * Time.deltaTime;
         Managers.Map.StageTransition.CheckMapChanged(transform.position);
     }
 

@@ -7,7 +7,7 @@
       "Level": 1,
       "Exp": 0.0,
       "MaxHp": 10.0,
-      "HP": 10.0,
+      "Hp": 10.0,
       "HpRate": 2.0,
       "Atk": 5.0,
       "AtkRate": 2.0,

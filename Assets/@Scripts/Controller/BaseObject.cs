@@ -37,4 +37,9 @@ public class BaseObject : MonoBehaviour
     {
 
     }
+
+    public virtual void OnDead()
+    {
+
+    }
 }

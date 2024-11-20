@@ -89,8 +89,22 @@ public class Creature : BaseObject
     public override void OnDamaged(Creature owner, SkillBase skill)
     {
         base.OnDamaged(owner, skill);
+
+        float damage = Mathf.Clamp((owner.Atk * skill.Data.DamageMultiplier) - Def, 1, Hp);
+        Hp -= damage;
+
+        if (Hp <= 0)
+            State = ECreatureState.Dead;    // 사망
+
+        Debug.Log($"스킬에 맞은 {gameObject.name}의 HP가 {Hp}로 됐다.");
     }
 
+    public override void OnDead()
+    {
+        base.OnDead();
+    }
+
+    #region 애니메이션
     protected void UpdateAnimation()
     {
         switch (State)
@@ -107,6 +121,7 @@ public class Creature : BaseObject
             case ECreatureState.OnDamaged:
                 break;
             case ECreatureState.Dead:
+                UpdateDeadAnimation();
                 break;
         }
     }
@@ -167,4 +182,10 @@ public class Creature : BaseObject
                 break;
         }
     }
+
+    protected void UpdateDeadAnimation()
+    {
+        _animator.Play("Dead");
+    }
+    #endregion
 }
