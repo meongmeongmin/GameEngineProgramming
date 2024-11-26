@@ -36,7 +36,9 @@ public class Player : Creature
     void FixedUpdate()
     {
         //RigidBody.velocity = Axis * MoveSpeed;
-        transform.position += (Vector3)Axis * MoveSpeed * Time.deltaTime;
+        //transform.position += (Vector3)Axis * MoveSpeed * Time.deltaTime;
+        Vector3 nextPosition = transform.position + ((Vector3)Axis * MoveSpeed * Time.deltaTime);
+        RigidBody.MovePosition(nextPosition);
         Managers.Map.StageTransition.CheckMapChanged(transform.position);
     }
 
@@ -71,14 +73,10 @@ public class Player : Creature
     float GetAngle(Vector2 fromPos, Vector2 toPos)
     {
         float angle = 0;
-        if (Axis.x != 0 || Axis.y != 0)
-        {
-            Vector2 deltaPos = (toPos - fromPos).normalized;
-            float radian = Mathf.Atan2(deltaPos.y, deltaPos.x);
-            angle = radian * Mathf.Rad2Deg;
-        }
-        else
-            angle = _angle;
+
+        Vector2 deltaPos = (toPos - fromPos).normalized;
+        float radian = Mathf.Atan2(deltaPos.y, deltaPos.x);
+        angle = radian * Mathf.Rad2Deg;
 
         return angle;
     }

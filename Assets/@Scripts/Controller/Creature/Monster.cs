@@ -49,8 +49,7 @@ public class Monster : Creature
 
         if (dist < _reactionDistance)   // 플레이어 탐지
         {
-            float radian;
-            _angle = GetAngle(transform.position, player.transform.position, out radian);
+            _angle = GetAngle(transform.position, player.transform.position, out float radian);
             Axis = new Vector2(Mathf.Cos(radian) * MoveSpeed, Mathf.Sin(radian) * MoveSpeed);
 
             // 방향 구하기
@@ -72,7 +71,10 @@ public class Monster : Creature
     void FixedUpdate()
     {
         if (State == ECreatureState.Move)
-            transform.position += (Vector3)Axis * MoveSpeed * Time.deltaTime;
+        {
+            Vector3 nextPosition = transform.position + ((Vector3)Axis * MoveSpeed * Time.deltaTime);
+            RigidBody.MovePosition(nextPosition);
+        }
     }
 
     float GetAngle(Vector2 fromPos, Vector2 toPos, out float radian)
@@ -88,6 +90,9 @@ public class Monster : Creature
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        if (State == ECreatureState.Dead)
+            return;
+
         Player player = collision.gameObject.GetComponent<Player>();
         if (player == null)
             return;

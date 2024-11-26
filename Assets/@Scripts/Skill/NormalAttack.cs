@@ -54,6 +54,10 @@ public class NormalAttack : SkillBase
 
     IEnumerator CoKnockback(BaseObject target, Vector2 dir, float distance, float duration)
     {
+        Rigidbody2D rb = target.GetComponent<Rigidbody2D>();
+        if (rb == null)
+            yield break;
+
         Vector3 startPosition = target.transform.position;
         Vector3 targetPosition = startPosition + (Vector3)(dir.normalized * distance);
 
@@ -62,10 +66,9 @@ public class NormalAttack : SkillBase
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
-            target.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            Vector3 nextPosition = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            rb.MovePosition(nextPosition);
             yield return null;
         }
-
-        target.transform.position = targetPosition;
     }
 }
