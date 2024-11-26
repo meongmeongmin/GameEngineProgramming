@@ -102,7 +102,8 @@ public class Stage : MonoBehaviour
             switch (info.ObjectType)
             {
                 case EObjectType.Monster:
-                    // TODO
+                    Monster monster = Managers.Object.Spawn<Monster>(worldPos, info.DataID);
+                    _spawnObjects.Add(monster);
                     break;
                 case EObjectType.Exit:
                     Exit exit = Managers.Object.Spawn<Exit>(worldPos, info.DataID);

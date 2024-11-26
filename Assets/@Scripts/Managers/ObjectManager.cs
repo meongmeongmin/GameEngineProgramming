@@ -7,6 +7,7 @@ using static Define;
 public class ObjectManager
 {
     public HashSet<Player> Player { get; } = new HashSet<Player>();
+    public HashSet<Monster> Monster { get; } = new HashSet<Monster>();
     public HashSet<Projectile> Projectiles { get; } = new HashSet<Projectile>();
     // TODO: 몬스터
 
@@ -34,7 +35,9 @@ public class ObjectManager
         }
         else if (obj.ObjectType == EObjectType.Monster)
         {
-            // TODO: 몬스터
+            Monster monster = go.GetComponent<Monster>();
+            Monster.Add(monster);
+            monster.SetInfo(dataID);
         }
         else if (obj.ObjectType == EObjectType.Projectile)
         {
@@ -57,7 +60,8 @@ public class ObjectManager
         }
         else if (obj.ObjectType == EObjectType.Monster)
         {
-            // TODO: 몬스터
+            Monster monster = obj.GetComponent<Monster>();
+            Monster.Remove(monster);
         }
         else if (obj.ObjectType == EObjectType.Projectile)
         {

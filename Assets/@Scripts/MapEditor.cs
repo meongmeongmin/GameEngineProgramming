@@ -23,14 +23,15 @@ public class MapEditor : MonoBehaviour
         {
             CustomTile customTile = ScriptableObject.CreateInstance<CustomTile>();
             customTile.Name = data.PrefabLabel;
-            
+
+            #region Sprite
             string spriteName = data.SpriteName;
             spriteName = Regex.Replace(spriteName, "_.*", "");
             Sprite[] sprites = AssetDatabase.LoadAllAssetsAtPath($"Assets/@Resources/Sprites/Monsters/{spriteName}.png")
                                  .OfType<Sprite>()
                                  .ToArray();
             Sprite spr = sprites.FirstOrDefault(s => s.name == data.SpriteName);
-
+            #endregion
             customTile.sprite = spr;
             customTile.DataID = data.DataID;
             customTile.ObjectType = Define.EObjectType.Monster;
@@ -42,9 +43,8 @@ public class MapEditor : MonoBehaviour
                 continue;
 
             if (File.Exists(path))
-            {
                 continue;
-            }
+            
             AssetDatabase.CreateAsset(customTile, path);
         }
 
@@ -53,16 +53,15 @@ public class MapEditor : MonoBehaviour
         {
             CustomTile customTile = ScriptableObject.CreateInstance<CustomTile>();
             customTile.Name = data.Name;
-            customTile.DataID = data.DataID;
-            customTile.ObjectType = Define.EObjectType.Exit;
 
+            #region Sprite
             string spriteName = data.SpriteName;
             spriteName = Regex.Replace(spriteName, "_.*", "");
             Sprite[] sprites = AssetDatabase.LoadAllAssetsAtPath($"Assets/@Resources/TileMaps/02_sprites/00_island&01_dungeon.png")
                                  .OfType<Sprite>()
                                  .ToArray();
             Sprite spr = sprites.FirstOrDefault(s => s.name == data.SpriteName);
-
+            #endregion
             customTile.sprite = spr;
             customTile.DataID = data.DataID;
             customTile.ObjectType = Define.EObjectType.Exit;
@@ -74,9 +73,8 @@ public class MapEditor : MonoBehaviour
                 continue;
 
             if (File.Exists(path))
-            {
                 continue;
-            }
+            
             AssetDatabase.CreateAsset(customTile, path);
         }
     }

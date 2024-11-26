@@ -12,7 +12,7 @@ using UnityEditor;
 public class CustomTile : Tile
 {
     [Space] [Header("CustomTile")]
-    public Define.EObjectType ObjectType  = Define.EObjectType.Exit;
+    public Define.EObjectType ObjectType;
     public int DataID;
     public string Name;
 }
