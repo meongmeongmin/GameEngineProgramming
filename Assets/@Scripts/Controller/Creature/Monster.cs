@@ -9,6 +9,9 @@ public class Monster : Creature
     
     protected float _reactionDistance;
 
+    float _lastDamageTime = 0f;
+    float _damageInterval = 0.5f;
+
     public override bool Init()
     {
         base.Init();
@@ -88,7 +91,7 @@ public class Monster : Creature
         return angle;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionStay2D(Collision2D collision)
     {
         if (State == ECreatureState.Dead)
             return;
@@ -97,6 +100,11 @@ public class Monster : Creature
         if (player == null)
             return;
 
-        player.OnDamaged(this, null);
+        // 0.5초 간격으로 데미지를 준다
+        if (Time.time - _lastDamageTime >= _damageInterval)
+        {
+            player.OnDamaged(this, null);
+            _lastDamageTime = Time.time;
+        }
     }
 }
