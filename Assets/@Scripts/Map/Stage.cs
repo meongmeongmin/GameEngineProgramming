@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
-using UnityEngine.Diagnostics;
 using UnityEngine.Tilemaps;
 using static Define;
 
@@ -120,7 +118,7 @@ public class Stage : MonoBehaviour
             switch (obj.ObjectType)
             {
                 case EObjectType.Monster:
-                    // TODO
+                    Managers.Object.Despawn(obj as Monster);
                     break;
                 case EObjectType.Exit:
                     Managers.Object.Despawn(obj as Exit);

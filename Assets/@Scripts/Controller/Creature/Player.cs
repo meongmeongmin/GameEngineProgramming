@@ -5,19 +5,6 @@ using static Define;
 
 public class Player : Creature
 {
-    Vector2 _axis;  // 입력한 방향키
-    public Vector2 Axis
-    {
-        get { return _axis; }
-        set 
-        { 
-            if (_axis != value)
-                _axis = value; 
-        }
-    }
-
-    float _angle = -90.0f;
-
     public override bool Init()
     {
         base.Init();
@@ -63,8 +50,7 @@ public class Player : Creature
         {
             // 이동 각도 구하기
             Vector2 fromPos = transform.position;
-            Vector2 toPos = fromPos + Axis;
-            _angle = GetAngle(fromPos, toPos);
+            _angle = GetAngle(fromPos, fromPos + Axis);
 
             // 방향 구하기
             if (_angle >= 45 && _angle <= 135)
@@ -87,7 +73,7 @@ public class Player : Creature
         float angle = 0;
         if (Axis.x != 0 || Axis.y != 0)
         {
-            Vector2 deltaPos = new Vector2(toPos.x - fromPos.x, toPos.y - fromPos.y);
+            Vector2 deltaPos = (toPos - fromPos).normalized;
             float radian = Mathf.Atan2(deltaPos.y, deltaPos.x);
             angle = radian * Mathf.Rad2Deg;
         }
@@ -99,10 +85,12 @@ public class Player : Creature
 
     void GetSkillInput()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))    // 기본 스킬
             Skills.DefaultSkill.DoSkill();
-        else if (Input.GetKeyDown(KeyCode.X))
+
+        else if (Input.GetKeyDown(KeyCode.X))   // 보조 스킬
             Skills.AuxiliarySkill.DoSkill();
+
         else if (State == ECreatureState.Skill)
             State = ECreatureState.Idle;
     }

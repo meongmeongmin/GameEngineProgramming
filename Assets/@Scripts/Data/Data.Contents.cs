@@ -78,6 +78,7 @@ namespace Data
     public class MonsterData : CreatureData
     {
         public int DropExp;
+        public float ReactionDistance;
     }
 
     [Serializable]

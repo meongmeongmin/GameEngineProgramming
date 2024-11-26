@@ -51,6 +51,19 @@ public class Creature : BaseObject
         }
     }
 
+    Vector2 _axis;  // 입력한 방향키
+    public Vector2 Axis
+    {
+        get { return _axis; }
+        set
+        {
+            if (_axis != value)
+                _axis = value;
+        }
+    }
+
+    protected float _angle = -90.0f;
+
     public override bool Init()
     {
         base.Init();
@@ -90,7 +103,12 @@ public class Creature : BaseObject
     {
         base.OnDamaged(owner, skill);
 
-        float damage = Mathf.Clamp((owner.Atk * skill.Data.DamageMultiplier) - Def, 1, Hp);
+        float damage;
+        if (skill == null)
+            damage = Mathf.Clamp(owner.Atk - Def, 1, Hp);
+        else
+            damage = Mathf.Clamp((owner.Atk * skill.Data.DamageMultiplier) - Def, 1, Hp);
+
         Hp -= damage;
 
         if (Hp <= 0)

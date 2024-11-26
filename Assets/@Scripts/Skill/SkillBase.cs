@@ -23,7 +23,6 @@ public class SkillBase : MonoBehaviour
     {
         if (_isSkillUsable)
         {
-            Debug.Log("DoSkill");
             Owner.State = ECreatureState.Skill;
             StartCoroutine(CoCountdownCooldown());
             return true;
