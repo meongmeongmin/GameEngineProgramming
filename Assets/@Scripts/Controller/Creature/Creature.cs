@@ -9,6 +9,9 @@ public class Creature : BaseObject
 
     public Data.CreatureData CreatureData { get; protected set; }
     public SkillComponent Skills { get; protected set; }
+    public SkillBase CurrentSkill { get; protected set; }
+
+    public BaseObject Target { get; protected set; }
 
     public int Level { get; protected set; }
     public float Exp { get; protected set; }
@@ -111,15 +114,37 @@ public class Creature : BaseObject
 
         Hp -= damage;
 
-        if (Hp <= 0)
-            State = ECreatureState.Dead;    // 사망
+        if (Hp <= 0)    // 사망
+        {
+            State = ECreatureState.Dead;
+            OnDead();
+        }
+        else
+            State = ECreatureState.OnDamaged;
 
         Debug.Log($"스킬에 맞은 {gameObject.name}의 HP가 {Hp}로 됐다.");
+        StartCoroutine(CoUpdateOnDamaged(skill));
     }
 
     public override void OnDead()
     {
         base.OnDead();
+    }
+
+    IEnumerator CoUpdateOnDamaged(SkillBase skill)
+    {
+        if (skill == null)
+            yield break;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < skill.StaggerTime)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        State = ECreatureState.Idle;
     }
 
     #region 애니메이션
