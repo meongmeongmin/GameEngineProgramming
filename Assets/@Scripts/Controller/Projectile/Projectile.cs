@@ -26,7 +26,7 @@ public class Projectile : BaseObject
         Data = Managers.Data.ProjectileDataDic[dataID];
     }
 
-    public void SetSpawnInfo(Creature owner, SkillBase skill)
+    public void SetSpawnInfo(Creature owner, SkillBase skill, Vector3 dir)
     {
         Owner = owner;
         Skill = skill;
@@ -39,7 +39,7 @@ public class Projectile : BaseObject
 
         StraightMotion straightMotion = ProjectileMotion as StraightMotion;
         if (straightMotion != null)
-            straightMotion.SetInfo(Data.DataID, owner.CenterPosition, Util.DirToVector3(Owner.Dir), () => { Managers.Object.Despawn(this); });
+            straightMotion.SetInfo(Data.DataID, owner.CenterPosition, dir, () => { Managers.Object.Despawn(this); });
 
         StartCoroutine(CoReserveDestroy(Data.Duration));
     }

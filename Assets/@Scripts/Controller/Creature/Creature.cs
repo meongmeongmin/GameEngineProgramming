@@ -144,7 +144,7 @@ public class Creature : BaseObject
         }
     }
 
-    protected void UpdateIdleAnimation()
+    protected virtual void UpdateIdleAnimation()
     {
         switch (Dir)
         {
@@ -163,7 +163,7 @@ public class Creature : BaseObject
         }
     }
 
-    protected void UpdateMoveAnimation()
+    protected virtual void UpdateMoveAnimation()
     {
         switch (Dir)
         {
@@ -182,7 +182,7 @@ public class Creature : BaseObject
         }
     }
 
-    protected void UpdateSkillAnimation()
+    protected virtual void UpdateSkillAnimation()
     {
         switch (Dir)
         {
@@ -201,7 +201,7 @@ public class Creature : BaseObject
         }
     }
 
-    protected void UpdateDeadAnimation()
+    protected virtual void UpdateDeadAnimation()
     {
         _animator.Play("Dead");
     }

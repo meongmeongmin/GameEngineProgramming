@@ -52,7 +52,7 @@ public class Player : Creature
         {
             // 이동 각도 구하기
             Vector2 fromPos = transform.position;
-            _angle = GetAngle(fromPos, fromPos + Axis);
+            _angle = Util.GetAngle(fromPos, fromPos + Axis);
 
             // 방향 구하기
             if (_angle >= 45 && _angle <= 135)
@@ -70,26 +70,15 @@ public class Player : Creature
             State = ECreatureState.Idle;
     }
 
-    float GetAngle(Vector2 fromPos, Vector2 toPos)
-    {
-        float angle = 0;
-
-        Vector2 deltaPos = (toPos - fromPos).normalized;
-        float radian = Mathf.Atan2(deltaPos.y, deltaPos.x);
-        angle = radian * Mathf.Rad2Deg;
-
-        return angle;
-    }
-
     void GetSkillInput()
     {
         if (Input.GetKeyDown(KeyCode.Z))    // 기본 스킬
-            Skills.DefaultSkill.DoSkill();
-
+            CurrentSkill = Skills.DefaultSkill;
         else if (Input.GetKeyDown(KeyCode.X))   // 보조 스킬
-            Skills.AuxiliarySkill.DoSkill();
+            CurrentSkill = Skills.AuxiliarySkill;
+        else
+            return;
 
-        else if (State == ECreatureState.Skill)
-            State = ECreatureState.Idle;
+        CurrentSkill.DoSkill();
     }
 }

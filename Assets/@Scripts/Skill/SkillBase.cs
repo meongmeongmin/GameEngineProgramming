@@ -8,14 +8,19 @@ public class SkillBase : MonoBehaviour
 {
     public Creature Owner { get; protected set; }
     public Data.SkillData Data { get; private set; }
-    public float RemainCoolTime { get; protected set; }
-    
+    public float CoolTime { get; protected set; }
+    public float StaggerTime { get; protected set; }
+
     bool _isSkillUsable;
 
     public virtual void SetInfo(Creature owner, int skillID)
     {
         Owner = owner;
         Data = Managers.Data.SkillDataDic[skillID];
+
+        CoolTime = Data.CoolTime;
+        StaggerTime = Data.StaggerTime;
+        
         _isSkillUsable = true;
     }
 
@@ -33,17 +38,14 @@ public class SkillBase : MonoBehaviour
 
     IEnumerator CoCountdownCooldown()
     {
-        RemainCoolTime = Data.CoolTime;
         _isSkillUsable = false;
-        yield return new WaitForSeconds(Data.CoolTime);
-        
-        RemainCoolTime = 0;
+        yield return new WaitForSeconds(CoolTime);
         _isSkillUsable = true;
     }
 
-    protected virtual void GenerateProjectile(Creature owner, Vector3 spawnPos, string name = null)
+    protected virtual void GenerateProjectile(Creature owner, Vector3 spawnPos, Vector3 dir, string name = null)
     {
         Projectile projectile = Managers.Object.Spawn<Projectile>(spawnPos, Data.ProjectileID, name);
-        projectile.SetSpawnInfo(Owner, this);
+        projectile.SetSpawnInfo(Owner, this, dir);
     }
 }

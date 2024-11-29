@@ -17,7 +17,7 @@ public class ArrowShoot : SkillBase
             return false;
 
         Owner.State = ECreatureState.Skill;
-        GenerateProjectile(Owner, Owner.CenterPosition, Data.PrefabLabel);
+        GenerateProjectile(Owner, Owner.CenterPosition, Util.DirToVector3(Owner.Dir), Data.PrefabLabel);
         return true;
     }
 }

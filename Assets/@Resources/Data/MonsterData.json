@@ -2,7 +2,7 @@
   "monsters": [
     {
       "DropExp": 1,
-      "ReactionDistance": 4.0,
+      "SearchScope": 4.0,
       "DataID": 10001,
       "PrefabLabel": "Slime",
       "SpriteName": "Slime_9",
@@ -17,6 +17,7 @@
       "DefRate": 1.0,
       "MoveSpeed": 1.5,
       "SkillIDList": []
+    },
     }
   ]
 }

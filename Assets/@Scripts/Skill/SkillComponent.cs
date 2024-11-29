@@ -8,8 +8,8 @@ using UnityEngine;
 public class SkillComponent : MonoBehaviour
 {
     public List<SkillBase> SkillList { get; } = new List<SkillBase>();
-    public SkillBase DefaultSkill { get; private set; }
-    public SkillBase AuxiliarySkill { get; private set; }
+    public SkillBase DefaultSkill { get; set; }
+    public SkillBase AuxiliarySkill { get; set; }
 
     Creature _owner;
 
@@ -49,9 +49,17 @@ public class SkillComponent : MonoBehaviour
         SkillList.Add(skill);
 
         // 기본값
-        if (skillID == 30001)
-            DefaultSkill = skill;
-        else if (skillID == 30011)
-            AuxiliarySkill = skill;
+        if (_owner.ObjectType == Define.EObjectType.Player)
+        {
+            if (skillID == 30001)
+                DefaultSkill = skill;
+            else if (skillID == 30011)
+                AuxiliarySkill = skill;
+        }
+        else if (_owner.ObjectType == Define.EObjectType.Monster)
+        {
+            if (skillID == 30021)
+                DefaultSkill = skill;
+        }
     }
 }

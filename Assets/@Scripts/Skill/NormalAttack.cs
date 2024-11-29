@@ -1,15 +1,13 @@
 using Data;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
 using UnityEngine;
+using static Define;
 
 public class NormalAttack : SkillBase
 {
     float _angle = 90f; // 스킬 각도 (부채꼴 각도)
     float _knockbackDistance = 1.5f; // 넉백 거리
-    float _knockbackDuration = 0.3f; // 넉백 시간
 
     public override void SetInfo(Creature owner, int skillID)
     {
@@ -45,7 +43,7 @@ public class NormalAttack : SkillBase
             {
                 Debug.Log($"타격 대상: {target.name}");
                 creature.OnDamaged(Owner, this);
-                StartCoroutine(CoKnockback(creature, skillDir, _knockbackDistance, _knockbackDuration));
+                StartCoroutine(CoKnockback(creature, skillDir, _knockbackDistance, StaggerTime));
             }
         }
 
@@ -65,9 +63,13 @@ public class NormalAttack : SkillBase
 
         while (elapsedTime < duration)
         {
+            if (rb == null)
+                yield break;
+
             elapsedTime += Time.deltaTime;
             Vector3 nextPosition = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
             rb.MovePosition(nextPosition);
+            
             yield return null;
         }
     }

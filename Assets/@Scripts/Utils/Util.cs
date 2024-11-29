@@ -21,4 +21,13 @@ public static class Util
                 return Vector3.zero; // 예외 처리
         }
     }
+
+    public static float GetAngle(Vector2 fromPos, Vector2 toPos)
+    {
+        Vector2 deltaPos = (toPos - fromPos).normalized;
+        float radian = Mathf.Atan2(deltaPos.y, deltaPos.x);
+        float angle = radian * Mathf.Rad2Deg;
+
+        return angle;
+    }
 }

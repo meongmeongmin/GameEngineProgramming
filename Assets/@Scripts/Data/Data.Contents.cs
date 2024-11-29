@@ -78,7 +78,7 @@ namespace Data
     public class MonsterData : CreatureData
     {
         public int DropExp;
-        public float ReactionDistance;
+        public float SearchScope;
     }
 
     [Serializable]
@@ -123,10 +123,10 @@ namespace Data
         public string Name;
         public int ProjectileID;
 		public string PrefabLabel;
-        public string AnimName;
         public float DamageMultiplier;
         public float Range;
         public float CoolTime;
+        public float StaggerTime;
     }
 
     [Serializable]

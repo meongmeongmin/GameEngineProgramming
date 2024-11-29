@@ -7,7 +7,7 @@ public class Monster : Creature
 {
     public Data.MonsterData Data { get; protected set; }
     
-    protected float _reactionDistance;
+    protected float _searchScope;
 
     float _lastDamageTime = 0f;
     float _damageInterval = 0.5f;
@@ -25,7 +25,7 @@ public class Monster : Creature
         base.SetInfo(dataID);
 
         Data = Managers.Data.MonsterDataDic[dataID];
-        _reactionDistance = Data.ReactionDistance;
+        _searchScope = Data.SearchScope;
     }
 
     public override void OnDead()
@@ -37,38 +37,39 @@ public class Monster : Creature
 
     void Update()
     {
-        if (State == ECreatureState.Dead)
-            return;
-
-        Player player = Managers.Object.Player;
-        if (player == null)
+        Target = Managers.Object.Player;
+        if (Target == null)
         {
             Debug.Log("플레이어를 찾지 못했다");
             State = ECreatureState.Idle;
             return;
         }
 
-        float dist = Vector2.Distance(transform.position, player.transform.position);
-
-        if (dist < _reactionDistance)   // 플레이어 탐지
+        // 플레이어 탐색
+        if (State != ECreatureState.OnDamaged)
         {
-            _angle = GetAngle(transform.position, player.transform.position, out float radian);
-            Axis = new Vector2(Mathf.Cos(radian) * MoveSpeed, Mathf.Sin(radian) * MoveSpeed);
+            float dist = Vector2.Distance(transform.position, Target.transform.position);
 
-            // 방향 구하기
-            if (_angle >= 45 && _angle <= 135)
-                Dir = EDir.Up;
-            else if (_angle > 135 || _angle < -135)
-                Dir = EDir.Left;
-            else if (_angle >= -135 && _angle <= -45)
-                Dir = EDir.Down;
-            else if (_angle >= -45 && _angle < 45)
-                Dir = EDir.Right;
+            if (dist < _searchScope)   // 플레이어 탐지
+            {
+                _angle = GetAngle(transform.position, Target.transform.position, out float radian);
+                Axis = new Vector2(Mathf.Cos(radian) * MoveSpeed, Mathf.Sin(radian) * MoveSpeed);
 
-            State = ECreatureState.Move;
+                // 방향 구하기
+                if (_angle >= 45 && _angle <= 135)
+                    Dir = EDir.Up;
+                else if (_angle > 135 || _angle < -135)
+                    Dir = EDir.Left;
+                else if (_angle >= -135 && _angle <= -45)
+                    Dir = EDir.Down;
+                else if (_angle >= -45 && _angle < 45)
+                    Dir = EDir.Right;
+
+                State = ECreatureState.Move;
+            }
+            else
+                State = ECreatureState.Idle;
         }
-        else
-            State = ECreatureState.Idle;
     }
 
     void FixedUpdate()
@@ -82,13 +83,9 @@ public class Monster : Creature
 
     float GetAngle(Vector2 fromPos, Vector2 toPos, out float radian)
     {
-        float angle = 0;
-        
         Vector2 deltaPos = (toPos - fromPos).normalized;
         radian = Mathf.Atan2(deltaPos.y, deltaPos.x);
-        angle = radian * Mathf.Rad2Deg;
-
-        return angle;
+        return Util.GetAngle(fromPos, toPos);
     }
 
     void OnCollisionStay2D(Collision2D collision)
@@ -106,5 +103,10 @@ public class Monster : Creature
             player.OnDamaged(this, null);
             _lastDamageTime = Time.time;
         }
+    }
+
+    protected override void UpdateIdleAnimation()
+    {
+        _animator.Play("Idle");
     }
 }
