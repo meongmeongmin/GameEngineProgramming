@@ -27,13 +27,13 @@
       "Level": 1,
       "Exp": 0.0,
       "MaxHp": 20.0,
-      "HP": 20.0,
+      "HP": 30.0,
       "HpRate": 10.0,
       "Atk": 5.0,
       "AtkRate": 3.0,
       "Def": 1.5,
       "DefRate": 1.0,
-      "MoveSpeed": 1.0,
+      "MoveSpeed": 0.0,
       "SkillIDList": [
         30021
       ]

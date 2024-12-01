@@ -76,6 +76,8 @@ public class SkillBase : MonoBehaviour
 
             yield return null;
         }
+
+        rb.velocity = Vector2.zero;
     }
 
     protected virtual void GenerateProjectile(Creature owner, Vector3 spawnPos, Vector3 dir, string name = null)
