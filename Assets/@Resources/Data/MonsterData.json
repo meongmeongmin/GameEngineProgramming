@@ -18,6 +18,25 @@
       "MoveSpeed": 1.5,
       "SkillIDList": []
     },
+    {
+      "DropExp": 1,
+      "SearchScope": 7.0,
+      "DataID": 10011,
+      "PrefabLabel": "Golem",
+      "SpriteName": "Golem_Idle_0",
+      "Level": 1,
+      "Exp": 0.0,
+      "MaxHp": 20.0,
+      "HP": 20.0,
+      "HpRate": 10.0,
+      "Atk": 5.0,
+      "AtkRate": 3.0,
+      "Def": 1.5,
+      "DefRate": 1.0,
+      "MoveSpeed": 1.0,
+      "SkillIDList": [
+        30021
+      ]
     }
   ]
 }

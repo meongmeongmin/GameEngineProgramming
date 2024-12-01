@@ -9,6 +9,14 @@
       "Duration": 1.0,
       "ProjSpeed": 10.0
     },
+    {
+      "DataID": 40011,
+      "Name": "Bullet",
+      "MotionComponentName": "StraightMotion",
+      "ProjectileSpriteName": "Bullet",
+      "PrefabLabel": "Bullet",
+      "Duration": 3.0,
+      "ProjSpeed": 5.0
     }
   ]
 }

@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Boss_0
+      name: Golem_Idle_0
       rect:
         serializedVersion: 2
         x: 0
@@ -144,7 +144,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -157,7 +157,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss_1
+      name: Golem_Idle_1
       rect:
         serializedVersion: 2
         x: 97
@@ -165,7 +165,7 @@ TextureImporter:
         width: 94
         height: 94
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -178,7 +178,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss_2
+      name: Golem_Jump_0
       rect:
         serializedVersion: 2
         x: 195
@@ -186,7 +186,7 @@ TextureImporter:
         width: 90
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -199,7 +199,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss_3
+      name: Golem_Jump_1
       rect:
         serializedVersion: 2
         x: 298
@@ -207,7 +207,7 @@ TextureImporter:
         width: 140
         height: 76
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -220,7 +220,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss_4
+      name: Golem_Dead
       rect:
         serializedVersion: 2
         x: 453
@@ -228,7 +228,7 @@ TextureImporter:
         width: 86
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -251,11 +251,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Boss_0: 1384008730
-      Boss_1: -1206460521
-      Boss_2: -116280952
-      Boss_3: -644540530
-      Boss_4: 1362444439
+      Golem_Dead: 1362444439
+      Golem_Idle_0: 1384008730
+      Golem_Idle_1: -1206460521
+      Golem_Jump_0: -116280952
+      Golem_Jump_1: -644540530
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

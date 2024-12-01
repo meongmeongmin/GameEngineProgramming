@@ -20,6 +20,15 @@
       "CoolTime": 0.5,
       "StaggerTime": 0.0
     },
+    {
+      "DataID": 30021,
+      "Name": "BulletShoot",
+      "ProjectileID": 40011,
+      "PrefabLabel": "Bullet",
+      "DamageMultiplier": 1.0,
+      "Range": 0.0,
+      "CoolTime": 0.5,
+      "StaggerTime": 0.0
     }
   ]
 }
