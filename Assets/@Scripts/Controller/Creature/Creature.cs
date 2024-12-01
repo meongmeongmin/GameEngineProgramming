@@ -135,6 +135,7 @@ public class Creature : BaseObject
         base.OnDead();
     }
 
+    // TODO: 아래의 코루틴 함수를 State 패턴으로 변환
     IEnumerator CoUpdateOnDamaged(SkillBase skill)
     {
         if (skill == null)
@@ -158,6 +159,21 @@ public class Creature : BaseObject
 
         if (ObjectType == EObjectType.Monster && State != ECreatureState.Dead)
             State = ECreatureState.Idle;
+    }
+
+    public IEnumerator CoUpdateSkill()
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < 0.5f)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        if (State != ECreatureState.Dead)
+            State = ECreatureState.Idle;
+
+        CurrentSkill = null;    // 스킬 중복 사용 방지
     }
 
     #region 애니메이션

@@ -11,7 +11,7 @@ public class SkillBase : MonoBehaviour
     public float CoolTime { get; protected set; }
     public float StaggerTime { get; protected set; }
 
-    bool _isSkillUsable;
+    bool _IsCooldownComplete;
 
     public virtual void SetInfo(Creature owner, int skillID)
     {
@@ -20,27 +20,38 @@ public class SkillBase : MonoBehaviour
 
         CoolTime = Data.CoolTime;
         StaggerTime = Data.StaggerTime;
-        
-        _isSkillUsable = true;
+
+        _IsCooldownComplete = true;
     }
 
     public virtual bool DoSkill()
     {
-        if (_isSkillUsable)
+        if (IsSkillUsable())
         {
+            Debug.Log("DoSkill");
             Owner.State = ECreatureState.Skill;
             StartCoroutine(CoCountdownCooldown());
+            StartCoroutine(Owner.CoUpdateSkill());
             return true;
         }
 
         return false;
     }
 
+    public bool IsSkillUsable()
+    {
+        // 쿨타임 검사
+        if (_IsCooldownComplete)
+            return true;
+
+        return false;
+    }
+
     IEnumerator CoCountdownCooldown()
     {
-        _isSkillUsable = false;
+        _IsCooldownComplete = false;
         yield return new WaitForSeconds(CoolTime);
-        _isSkillUsable = true;
+        _IsCooldownComplete = true;
     }
 
     public IEnumerator CoKnockback(BaseObject target, Vector2 direction, float distance, float duration)

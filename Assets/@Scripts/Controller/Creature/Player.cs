@@ -89,6 +89,10 @@ public class Player : Creature
 
     void GetSkillInput()
     {
+        // 스킬 중복 사용 방지
+        if (CurrentSkill != null)
+            return;
+
         if (Input.GetKeyDown(KeyCode.Z))    // 기본 스킬
             CurrentSkill = Skills.DefaultSkill;
         else if (Input.GetKeyDown(KeyCode.X))   // 보조 스킬
