@@ -100,7 +100,11 @@ public class Stage : MonoBehaviour
             switch (info.ObjectType)
             {
                 case EObjectType.Monster:
-                    Monster monster = Managers.Object.Spawn<Monster>(worldPos, info.DataID);
+                    Monster monster;
+                    if (info.Name == "Golem")   // 골렘은 임시적으로 name을 지정한다
+                        monster = Managers.Object.Spawn<Monster>(worldPos, info.DataID, "Golem");
+                    else
+                        monster = Managers.Object.Spawn<Monster>(worldPos, info.DataID);
                     _spawnObjects.Add(monster);
                     break;
                 case EObjectType.Exit:

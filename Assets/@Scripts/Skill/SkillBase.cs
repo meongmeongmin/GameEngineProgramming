@@ -56,6 +56,11 @@ public class SkillBase : MonoBehaviour
 
     public IEnumerator CoKnockback(BaseObject target, Vector2 direction, float distance, float duration)
     {
+        // 보스는 넉백 면역
+        Boss boss = target as Boss;
+        if (boss != null)
+            yield break;
+
         Rigidbody2D rb = target.GetComponent<Rigidbody2D>();
         if (rb == null)
             yield break;
