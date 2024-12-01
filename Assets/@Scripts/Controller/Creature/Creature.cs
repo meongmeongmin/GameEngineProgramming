@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -120,7 +121,10 @@ public class Creature : BaseObject
             OnDead();
         }
         else
+        {
             State = ECreatureState.OnDamaged;
+            OnDead();
+        }
 
         Debug.Log($"스킬에 맞은 {gameObject.name}의 HP가 {Hp}로 됐다.");
         StartCoroutine(CoUpdateOnDamaged(skill));
@@ -134,17 +138,26 @@ public class Creature : BaseObject
     IEnumerator CoUpdateOnDamaged(SkillBase skill)
     {
         if (skill == null)
+        {
+            if (ObjectType == EObjectType.Monster && State != ECreatureState.Dead)
+                State = ECreatureState.Idle;
+
             yield break;
+        }
 
         float elapsedTime = 0f;
 
         while (elapsedTime < skill.StaggerTime)
         {
             elapsedTime += Time.deltaTime;
+            SpriteRenderer.enabled = !SpriteRenderer.enabled;
             yield return null;
         }
 
-        State = ECreatureState.Idle;
+        SpriteRenderer.enabled = true;
+
+        if (ObjectType == EObjectType.Monster && State != ECreatureState.Dead)
+            State = ECreatureState.Idle;
     }
 
     #region 애니메이션

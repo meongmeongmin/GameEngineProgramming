@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using static Define;
 public class BaseObject : MonoBehaviour
 {
     public EObjectType ObjectType { get; protected set; }
+    public SpriteRenderer SpriteRenderer { get; protected set; }
     public Rigidbody2D RigidBody { get; private set; }
     public CircleCollider2D Collider { get; private set; }
 
@@ -26,6 +28,7 @@ public class BaseObject : MonoBehaviour
         if (_init)
             return false;
         
+        SpriteRenderer = GetComponent<SpriteRenderer>();
         RigidBody = GetComponent<Rigidbody2D>();
         Collider = GetComponent<CircleCollider2D>();
 

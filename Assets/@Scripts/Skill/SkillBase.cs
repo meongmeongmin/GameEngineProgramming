@@ -43,6 +43,30 @@ public class SkillBase : MonoBehaviour
         _isSkillUsable = true;
     }
 
+    public IEnumerator CoKnockback(BaseObject target, Vector2 direction, float distance, float duration)
+    {
+        Rigidbody2D rb = target.GetComponent<Rigidbody2D>();
+        if (rb == null)
+            yield break;
+
+        Vector3 startPosition = target.transform.position;
+        Vector3 targetPosition = startPosition + (Vector3)(direction * distance);
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            if (rb == null)
+                yield break;
+
+            elapsedTime += Time.deltaTime;
+            Vector3 nextPosition = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            rb.MovePosition(nextPosition);
+
+            yield return null;
+        }
+    }
+
     protected virtual void GenerateProjectile(Creature owner, Vector3 spawnPos, Vector3 dir, string name = null)
     {
         Projectile projectile = Managers.Object.Spawn<Projectile>(spawnPos, Data.ProjectileID, name);

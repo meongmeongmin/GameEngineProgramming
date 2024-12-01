@@ -49,28 +49,4 @@ public class NormalAttack : SkillBase
 
         return true;
     }
-
-    IEnumerator CoKnockback(BaseObject target, Vector2 dir, float distance, float duration)
-    {
-        Rigidbody2D rb = target.GetComponent<Rigidbody2D>();
-        if (rb == null)
-            yield break;
-
-        Vector3 startPosition = target.transform.position;
-        Vector3 targetPosition = startPosition + (Vector3)(dir.normalized * distance);
-
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            if (rb == null)
-                yield break;
-
-            elapsedTime += Time.deltaTime;
-            Vector3 nextPosition = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
-            rb.MovePosition(nextPosition);
-            
-            yield return null;
-        }
-    }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,9 @@ using static Define;
 
 public class Player : Creature
 {
+    public float StaggerTime { get; protected set; } = 0.3f;    // 피격 당할 때 움찔거리는 시간
+    float _knockbackDistance = 1.5f;    // 넉백 거리
+
     public override bool Init()
     {
         base.Init();
@@ -18,6 +22,16 @@ public class Player : Creature
         base.SetInfo(dataID);
     }
 
+    public override void OnDamaged(Creature owner, SkillBase skill)
+    {
+        if (State == ECreatureState.Dead || State == ECreatureState.OnDamaged)  // OnDamaged일 때는 무적 상태
+            return;
+
+        base.OnDamaged(owner, skill);
+        Vector3 direction = (transform.position - owner.transform.position).normalized;
+        StartCoroutine(CoKnockback(direction, _knockbackDistance, StaggerTime));
+    }
+
     public override void OnDead()
     {
         base.OnDead();
@@ -26,7 +40,7 @@ public class Player : Creature
 
     void Update()
     {
-        if (State == ECreatureState.Dead)
+        if (State == ECreatureState.Dead || State == ECreatureState.OnDamaged)
             return;
 
         GetDirInput();
@@ -37,9 +51,12 @@ public class Player : Creature
     {
         //RigidBody.velocity = Axis * MoveSpeed;
         //transform.position += (Vector3)Axis * MoveSpeed * Time.deltaTime;
-        Vector3 nextPosition = transform.position + ((Vector3)Axis * MoveSpeed * Time.deltaTime);
-        RigidBody.MovePosition(nextPosition);
-        Managers.Map.StageTransition.CheckMapChanged(transform.position);
+        if (State == ECreatureState.Move)
+        {
+            Vector3 nextPosition = transform.position + ((Vector3)Axis * MoveSpeed * Time.deltaTime);
+            RigidBody.MovePosition(nextPosition);
+            Managers.Map.StageTransition.CheckMapChanged(transform.position);
+        }
     }
 
     void GetDirInput()
@@ -80,5 +97,32 @@ public class Player : Creature
             return;
 
         CurrentSkill.DoSkill();
+    }
+
+    IEnumerator CoKnockback(Vector2 direction, float distance, float duration)
+    {
+        Vector3 startPosition = transform.position;
+        Vector3 targetPosition = startPosition + (Vector3)(direction * distance);
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            if (RigidBody == null)
+                yield break;
+
+            elapsedTime += Time.deltaTime;
+            SpriteRenderer.enabled = !SpriteRenderer.enabled;
+            
+            Vector3 nextPosition = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            RigidBody.MovePosition(nextPosition);
+
+            yield return null;
+        }
+
+        SpriteRenderer.enabled = true;
+
+        if (State != ECreatureState.Dead)
+            State = ECreatureState.Idle;
     }
 }

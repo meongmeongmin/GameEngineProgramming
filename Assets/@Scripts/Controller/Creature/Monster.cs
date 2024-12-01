@@ -90,9 +90,6 @@ public class Monster : Creature
 
     void OnCollisionStay2D(Collision2D collision)
     {
-        if (State == ECreatureState.Dead)
-            return;
-
         Player player = collision.gameObject.GetComponent<Player>();
         if (player == null)
             return;

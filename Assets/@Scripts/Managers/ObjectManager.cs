@@ -7,9 +7,8 @@ using static Define;
 public class ObjectManager
 {
     public Player Player { get; private set; }
-    public HashSet<Monster> Monster { get; } = new HashSet<Monster>();
+    public HashSet<Monster> Monsters { get; } = new HashSet<Monster>();
     public HashSet<Projectile> Projectiles { get; } = new HashSet<Projectile>();
-    // TODO: 몬스터
 
     public T Spawn<T>(Vector3Int cellPos, int dataID) where T : BaseObject
     {
@@ -36,7 +35,7 @@ public class ObjectManager
         else if (obj.ObjectType == EObjectType.Monster)
         {
             Monster monster = go.GetComponent<Monster>();
-            Monster.Add(monster);
+            Monsters.Add(monster);
             monster.SetInfo(dataID);
         }
         else if (obj.ObjectType == EObjectType.Projectile)
@@ -56,7 +55,7 @@ public class ObjectManager
         if (obj.ObjectType == EObjectType.Monster)
         {
             Monster monster = obj.GetComponent<Monster>();
-            Monster.Remove(monster);
+            Monsters.Remove(monster);
         }
         else if (obj.ObjectType == EObjectType.Projectile)
         {
