@@ -121,10 +121,7 @@ public class Creature : BaseObject
             OnDead();
         }
         else
-        {
             State = ECreatureState.OnDamaged;
-            OnDead();
-        }
 
         Debug.Log($"스킬에 맞은 {gameObject.name}의 HP가 {Hp}로 됐다.");
         StartCoroutine(CoUpdateOnDamaged(skill));

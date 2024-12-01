@@ -125,6 +125,7 @@ public class Player : Creature
         }
 
         SpriteRenderer.enabled = true;
+        RigidBody.velocity = Vector2.zero;
 
         if (State != ECreatureState.Dead)
             State = ECreatureState.Idle;

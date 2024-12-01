@@ -10,6 +10,19 @@ public class ObjectManager
     public HashSet<Monster> Monsters { get; } = new HashSet<Monster>();
     public HashSet<Projectile> Projectiles { get; } = new HashSet<Projectile>();
 
+    #region Roots
+    public Transform GetRootTransform(string name)
+    {
+        GameObject root = GameObject.Find(name);
+        if (root == null)
+            root = new GameObject { name = name };
+
+        return root.transform;
+    }
+
+    public Transform MonsterRoot { get { return GetRootTransform("@Monsters"); } }
+    #endregion
+
     public T Spawn<T>(Vector3Int cellPos, int dataID) where T : BaseObject
     {
         Vector3 position = Managers.Map.CellToWorld(cellPos);
@@ -34,6 +47,7 @@ public class ObjectManager
         }
         else if (obj.ObjectType == EObjectType.Monster)
         {
+            obj.transform.parent = MonsterRoot;
             Monster monster = go.GetComponent<Monster>();
             Monsters.Add(monster);
             monster.SetInfo(dataID);
