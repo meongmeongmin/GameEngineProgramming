@@ -571,7 +571,7 @@ GameObject:
   - component: {fileID: 5675519846163494175}
   - component: {fileID: 1201322577158722272}
   m_Layer: 0
-  m_Name: 00_island&01_dungeon
+  m_Name: Island&Dungeon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

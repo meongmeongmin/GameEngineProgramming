@@ -3,8 +3,14 @@
     {
       "DataID": 20001,
       "Name": "Exit",
-      "ObjectType": 3,
+      "TileType": 1,
       "SpriteName": "TileMap_9"
+    },
+    {
+      "DataID": 20002,
+      "Name": "LockedDoor",
+      "TileType": 2,
+      "SpriteName": "Door"
     }
   ]
 }

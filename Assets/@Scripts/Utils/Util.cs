@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using UnityEditor;
 using UnityEngine;
 using static Define;
 
@@ -27,7 +30,16 @@ public static class Util
         Vector2 deltaPos = (toPos - fromPos).normalized;
         float radian = Mathf.Atan2(deltaPos.y, deltaPos.x);
         float angle = radian * Mathf.Rad2Deg;
-
         return angle;
+    }
+
+    public static Sprite FindTileMapsSprite(string spriteName)
+    {
+        string name = Regex.Replace(spriteName, "_.*", "");
+        Sprite[] sprites = AssetDatabase.LoadAllAssetsAtPath($"Assets/@Resources/TileMaps/02_sprites/{name}.png")
+                             .OfType<Sprite>()
+                             .ToArray();
+        Sprite spr = sprites.FirstOrDefault(s => s.name == spriteName);
+        return spr;
     }
 }

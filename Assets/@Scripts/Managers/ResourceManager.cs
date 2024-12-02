@@ -17,7 +17,7 @@ public class ResourceManager
 
         if (typeof(T) == typeof(Sprite))
         {
-            key = $"{key}.sprite";
+            //key = $"{key}.sprite";
             if (_resources.TryGetValue(key, out Object tmp))
                 return tmp as T;
         }
@@ -50,10 +50,10 @@ public class ResourceManager
     #region Addressable
     public void LoadAsync<T>(string key, Action<T> callback = null) where T : Object
     {
-        // ½ºÇÁ¶óÀÌÆ®ÀÎ °æ¿ì ÇÏÀ§ °´Ã¼ÀÇ ÀÌ¸§À¸·Î ·ÎµåÇØ¾ß ÇÑ´Ù.
+        // ìŠ¤í”„ë¼ì´íŠ¸ì¸ ê²½ìš° í•˜ìœ„ ê°ì²´ì˜ ì´ë¦„ìœ¼ë¡œ ë¡œë“œí•´ì•¼ í•œë‹¤.
         string loadkey = key;
-        if (key.Contains(".sprite"))
-            loadkey = $"{key}[{key.Replace(".sprite", "")}]";
+        //if (key.Contains(".sprite"))
+        //    loadkey = $"{key}[{key.Replace(".sprite", "")}]";
 
         var asyncOperation = Addressables.LoadAssetAsync<T>(key);
         asyncOperation.Completed += (op) =>

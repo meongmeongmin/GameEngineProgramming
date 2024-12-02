@@ -53,20 +53,11 @@ public class MapEditor : MonoBehaviour
         {
             CustomTile customTile = ScriptableObject.CreateInstance<CustomTile>();
             customTile.Name = data.Name;
-
-            #region Sprite
-            string spriteName = data.SpriteName;
-            spriteName = Regex.Replace(spriteName, "_.*", "");
-            Sprite[] sprites = AssetDatabase.LoadAllAssetsAtPath($"Assets/@Resources/TileMaps/02_sprites/00_island&01_dungeon.png")
-                                 .OfType<Sprite>()
-                                 .ToArray();
-            Sprite spr = sprites.FirstOrDefault(s => s.name == data.SpriteName);
-            #endregion
-            customTile.sprite = spr;
+            customTile.sprite = Util.FindTileMapsSprite(data.SpriteName); ;
             customTile.DataID = data.DataID;
-            customTile.ObjectType = Define.EObjectType.Exit;
+            customTile.ObjectType = Define.EObjectType.Tile;
             string name = $"{data.DataID}_{data.Name}";
-            string path = "Assets/@Resources/TileMaps/01_assets/Exit";
+            string path = "Assets/@Resources/TileMaps/01_assets/Tile";
             path = Path.Combine(path, $"{name}.Asset");
 
             if (path == "")

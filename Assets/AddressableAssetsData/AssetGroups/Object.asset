@@ -24,7 +24,7 @@ MonoBehaviour:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cf0595159d7a69043b4c35d95f7338c1
-    m_Address: Exit
+    m_Address: EffectTile
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

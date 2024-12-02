@@ -99,7 +99,7 @@ namespace Data
     {
         public int DataID;
         public string Name;
-        public Define.EObjectType ObjectType;
+        public Define.ETileType TileType;
         public string SpriteName;
     }
 

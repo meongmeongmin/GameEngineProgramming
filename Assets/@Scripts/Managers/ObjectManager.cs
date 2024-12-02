@@ -8,6 +8,7 @@ public class ObjectManager
 {
     public Player Player { get; private set; }
     public HashSet<Monster> Monsters { get; } = new HashSet<Monster>();
+    public HashSet<EffectTile> Tiles { get; } = new HashSet<EffectTile>();
     public HashSet<Projectile> Projectiles { get; } = new HashSet<Projectile>();
 
     #region Roots
@@ -52,6 +53,12 @@ public class ObjectManager
             Monsters.Add(monster);
             monster.SetInfo(dataID);
         }
+        else if (obj.ObjectType == EObjectType.Tile)
+        {
+            EffectTile tile = go.GetComponent<EffectTile>();
+            Tiles.Add(tile);
+            tile.SetInfo(dataID);
+        }
         else if (obj.ObjectType == EObjectType.Projectile)
         {
             Projectile projectile = go.GetComponent<Projectile>();
@@ -70,6 +77,11 @@ public class ObjectManager
         {
             Monster monster = obj.GetComponent<Monster>();
             Monsters.Remove(monster);
+        }
+        else if (obj.ObjectType == EObjectType.Tile)
+        {
+            EffectTile tile = obj.GetComponent<EffectTile>();
+            Tiles.Remove(tile);
         }
         else if (obj.ObjectType == EObjectType.Projectile)
         {

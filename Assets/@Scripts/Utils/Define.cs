@@ -17,9 +17,16 @@ public class Define
         None,
         Player,
         Monster,
-        Exit,
+        Tile,
         Waypoint,
         Projectile,
+    }
+
+    public enum ETileType
+    {
+        None,
+        Exit,
+        LockedDoor
     }
 
     public enum EDir

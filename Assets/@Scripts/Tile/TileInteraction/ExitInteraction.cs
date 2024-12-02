@@ -3,29 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
-public class Exit : BaseObject
+public class ExitInteraction : ITileInteraction
 {
-    Data.TileData _data;
-
-    public override bool Init()
+    public bool CanInteract()
     {
-        if (base.Init() == false)
-            return false;
-
-        ObjectType = EObjectType.Exit;
-
         return true;
     }
 
-    public void SetInfo(int dataID)
+    public void HandleOnCollisionEvent(BaseObject target)
     {
-        _data = Managers.Data.TileDataDic[dataID];
-        gameObject.name = $"{_data.DataID}_{_data.Name}";
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        Player player = collision.gameObject.GetComponent<Player>();
+        Player player = target as Player;
         if (player != null)
         {
             switch (Managers.Scene.CurrentScene.Scene)
@@ -38,5 +25,10 @@ public class Exit : BaseObject
                     break;
             }
         }
+    }
+
+    public void SetInfo(EffectTile tile)
+    {
+
     }
 }

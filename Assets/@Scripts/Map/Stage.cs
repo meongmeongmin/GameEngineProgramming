@@ -107,9 +107,9 @@ public class Stage : MonoBehaviour
                         monster = Managers.Object.Spawn<Monster>(worldPos, info.DataID);
                     _spawnObjects.Add(monster);
                     break;
-                case EObjectType.Exit:
-                    Exit exit = Managers.Object.Spawn<Exit>(worldPos, info.DataID);
-                    _spawnObjects.Add(exit);
+                case EObjectType.Tile:
+                    EffectTile tile = Managers.Object.Spawn<EffectTile>(worldPos, info.DataID);
+                    _spawnObjects.Add(tile);
                     break;
             }
         }
@@ -127,8 +127,8 @@ public class Stage : MonoBehaviour
                 case EObjectType.Monster:
                     Managers.Object.Despawn(obj as Monster);
                     break;
-                case EObjectType.Exit:
-                    Managers.Object.Despawn(obj as Exit);
+                case EObjectType.Tile:
+                    Managers.Object.Despawn(obj as EffectTile);
                     break;
             }
         }
@@ -154,7 +154,7 @@ public class Stage : MonoBehaviour
                 Vector3 worldPos = Managers.Map.CellToWorld(cellPos);
                 ObjectSpawnInfo info = new ObjectSpawnInfo(tile.Name, tile.DataID, worldPos, tile.ObjectType);
 
-                if (tile.ObjectType == EObjectType.Exit)
+                if (tile.ObjectType == EObjectType.Tile)
                     ExitSpawnInfo = info;
 
                 if (tile.ObjectType == EObjectType.Waypoint)
