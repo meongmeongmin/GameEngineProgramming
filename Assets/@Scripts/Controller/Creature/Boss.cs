@@ -13,6 +13,9 @@ public class Boss : Monster
 
     void Update()
     {
+        if (State == ECreatureState.Dead || State == ECreatureState.OnDamaged)
+            return;
+
         Target = Managers.Object.Player;
         if (Target == null)
         {
