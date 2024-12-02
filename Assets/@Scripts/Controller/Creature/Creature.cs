@@ -33,11 +33,8 @@ public class Creature : BaseObject
         get { return _state; }
         set
         {
-            if (_state != value)
-            {
-                _state = value;
-                UpdateAnimation();
-            }
+            _state = value;
+            UpdateAnimation();
         }
     }
 
@@ -115,21 +112,17 @@ public class Creature : BaseObject
 
         Hp -= damage;
 
-        if (Hp <= 0)    // 사망
-        {
-            State = ECreatureState.Dead;
-            OnDead();
-        }
-        else
-            State = ECreatureState.OnDamaged;
+        State = ECreatureState.OnDamaged;
+        StartCoroutine(CoUpdateOnDamaged(skill));
 
         Debug.Log($"스킬에 맞은 {gameObject.name}의 HP가 {Hp}로 됐다.");
-        StartCoroutine(CoUpdateOnDamaged(skill));
     }
 
     public override void OnDead()
     {
         base.OnDead();
+        Collider.enabled = false;
+        StartCoroutine(CoUpdateDead());
     }
 
     // TODO: 아래의 코루틴 함수를 State 패턴으로 변환
@@ -137,14 +130,21 @@ public class Creature : BaseObject
     {
         if (skill == null)
         {
-            if (ObjectType == EObjectType.Monster && State != ECreatureState.Dead)
+            SpriteRenderer.enabled = true;
+
+            if (ObjectType == EObjectType.Monster && Hp > 0)
                 State = ECreatureState.Idle;
+            else if (Hp <= 0)
+            {
+                State = ECreatureState.Dead;
+                OnDead();
+            }
 
             yield break;
         }
 
+        // 스킬 움찔 시간만큼 스프라이트가 계속 깜빡인다
         float elapsedTime = 0f;
-
         while (elapsedTime < skill.StaggerTime)
         {
             elapsedTime += Time.deltaTime;
@@ -154,23 +154,33 @@ public class Creature : BaseObject
 
         SpriteRenderer.enabled = true;
 
-        if (ObjectType == EObjectType.Monster && State != ECreatureState.Dead)
+        if (ObjectType == EObjectType.Monster && Hp > 0)
             State = ECreatureState.Idle;
+        else if (Hp <= 0)
+        {
+            State = ECreatureState.Dead;
+            OnDead();
+        }
     }
 
     public IEnumerator CoUpdateSkill()
     {
-        float elapsedTime = 0f;
-        while (elapsedTime < 0.5f)
-        {
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
+        yield return new WaitForSeconds(0.5f);
+        
         if (State != ECreatureState.Dead)
             State = ECreatureState.Idle;
 
         CurrentSkill = null;    // 스킬 중복 사용 방지
+    }
+
+    IEnumerator CoUpdateDead()
+    {
+        RigidBody.gravityScale = 1;
+        RigidBody.AddForce(new Vector2(0, 5), ForceMode2D.Impulse);
+        RigidBody.velocity = Vector2.zero;
+
+        yield return new WaitForSeconds(0.5f);
+        Managers.Object.Despawn(this);
     }
 
     #region 애니메이션

@@ -28,15 +28,12 @@ public class Monster : Creature
         _searchScope = Data.SearchScope;
     }
 
-    public override void OnDead()
-    {
-        base.OnDead();
-        // TODO: 몬스터 사망 처리 (경험치, 보상)
-        Managers.Object.Despawn(this);
-    }
-
     void Update()
     {
+        if (State == ECreatureState.Dead || State == ECreatureState.OnDamaged)
+            return;
+
+        // 플레이어 탐색
         Target = Managers.Object.Player;
         if (Target == null)
         {
@@ -45,31 +42,27 @@ public class Monster : Creature
             return;
         }
 
-        // 플레이어 탐색
-        if (State != ECreatureState.OnDamaged)
+        float dist = Vector2.Distance(transform.position, Target.transform.position);
+
+        if (dist < _searchScope)   // 플레이어 탐지
         {
-            float dist = Vector2.Distance(transform.position, Target.transform.position);
+            _angle = GetAngle(transform.position, Target.transform.position, out float radian);
+            Axis = new Vector2(Mathf.Cos(radian) * MoveSpeed, Mathf.Sin(radian) * MoveSpeed);
 
-            if (dist < _searchScope)   // 플레이어 탐지
-            {
-                _angle = GetAngle(transform.position, Target.transform.position, out float radian);
-                Axis = new Vector2(Mathf.Cos(radian) * MoveSpeed, Mathf.Sin(radian) * MoveSpeed);
+            // 방향 구하기
+            if (_angle >= 45 && _angle <= 135)
+                Dir = EDir.Up;
+            else if (_angle > 135 || _angle < -135)
+                Dir = EDir.Left;
+            else if (_angle >= -135 && _angle <= -45)
+                Dir = EDir.Down;
+            else if (_angle >= -45 && _angle < 45)
+                Dir = EDir.Right;
 
-                // 방향 구하기
-                if (_angle >= 45 && _angle <= 135)
-                    Dir = EDir.Up;
-                else if (_angle > 135 || _angle < -135)
-                    Dir = EDir.Left;
-                else if (_angle >= -135 && _angle <= -45)
-                    Dir = EDir.Down;
-                else if (_angle >= -45 && _angle < 45)
-                    Dir = EDir.Right;
-
-                State = ECreatureState.Move;
-            }
-            else
-                State = ECreatureState.Idle;
+            State = ECreatureState.Move;
         }
+        else
+            State = ECreatureState.Idle;
     }
 
     void FixedUpdate()

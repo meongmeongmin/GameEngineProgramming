@@ -24,7 +24,7 @@ public class Player : Creature
 
     public override void OnDamaged(Creature owner, SkillBase skill)
     {
-        if (State == ECreatureState.Dead || State == ECreatureState.OnDamaged)  // OnDamaged일 때는 무적 상태
+        if (owner == null || State == ECreatureState.Dead || State == ECreatureState.OnDamaged)  // OnDamaged일 때는 무적 상태
             return;
 
         base.OnDamaged(owner, skill);
@@ -35,7 +35,6 @@ public class Player : Creature
     public override void OnDead()
     {
         base.OnDead();
-        // TODO: 플레이어 사망 처리
     }
 
     void Update()

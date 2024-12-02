@@ -12,7 +12,8 @@ public class BaseObject : MonoBehaviour
     public CircleCollider2D Collider { get; private set; }
 
     public float ColliderRadius { get { return Collider != null ? Collider.radius : 0.0f; } }
-    public Vector3 CenterPosition { get { return transform.position + Vector3.up * ColliderRadius; } }
+    //public Vector3 CenterPosition { get { return transform.position + Vector3.up * ColliderRadius; } }
+    public Vector3 CenterPosition { get { return Collider.bounds.center; } }
 
     public int DataID { get; set; }
 
