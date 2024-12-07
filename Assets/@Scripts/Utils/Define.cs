@@ -26,7 +26,8 @@ public class Define
     {
         None,
         Exit,
-        LockedDoor
+        LockedDoor,
+        TreasureChest
     }
 
     public enum EDir

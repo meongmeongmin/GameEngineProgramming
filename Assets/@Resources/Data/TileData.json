@@ -11,6 +11,12 @@
       "Name": "LockedDoor",
       "TileType": 2,
       "SpriteName": "Door"
+    },
+    {
+      "DataID": 20003,
+      "Name": "TreasureChest",
+      "TileType": 3,
+      "SpriteName": "Items_3"
     }
   ]
 }

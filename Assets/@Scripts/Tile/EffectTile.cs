@@ -14,8 +14,8 @@ public interface ITileInteraction
 
 public class EffectTile : BaseObject
 {
-    Data.TileData _data;
-    public ETileType TileType { get { return _data.TileType; } }
+    public Data.TileData Data { get; protected set; }
+    public ETileType TileType { get { return Data.TileType; } }
     public ITileInteraction Interaction { get; private set; }
 
     public override bool Init()
@@ -29,23 +29,26 @@ public class EffectTile : BaseObject
 
     public void SetInfo(int dataID)
     {
-        _data = Managers.Data.TileDataDic[dataID];
-        gameObject.name = $"{_data.DataID}_{_data.Name}";
+        Data = Managers.Data.TileDataDic[dataID];
+        gameObject.name = $"{Data.DataID}_{Data.Name}";
 
         // SpriteRenderer
-        Sprite sprite = Managers.Resource.Load<Sprite>(_data.SpriteName);
+        Sprite sprite = Managers.Resource.Load<Sprite>(Data.SpriteName);
         if (sprite == null)
-            SpriteRenderer.sprite = Util.FindTileMapsSprite(_data.SpriteName);
+            SpriteRenderer.sprite = Util.FindTileMapsSprite(Data.SpriteName);
         else
             SpriteRenderer.sprite = sprite;
 
-        switch (_data.TileType)
+        switch (Data.TileType)
         {
             case ETileType.Exit:
                 Interaction = new ExitInteraction();
                 break;
             case ETileType.LockedDoor:
                 Interaction = new LockedDoorInteraction();
+                break;
+            case ETileType.TreasureChest:
+                Interaction = new TreasureChestInteraction();
                 break;
         }
 
