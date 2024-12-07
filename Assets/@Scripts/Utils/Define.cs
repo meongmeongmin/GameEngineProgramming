@@ -20,6 +20,7 @@ public class Define
         Tile,
         Waypoint,
         Projectile,
+        Item
     }
 
     public enum ETileType
@@ -28,6 +29,13 @@ public class Define
         Exit,
         LockedDoor,
         TreasureChest
+    }
+
+    public enum EItemType
+    {
+        None,
+        Key,
+        Life,
     }
 
     public enum EDir
@@ -48,4 +56,5 @@ public class Define
     }
 
     public const int PLAYER_ID = 10000;
+    public const int KEY_ID = 50001;
 }

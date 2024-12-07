@@ -95,6 +95,14 @@ public class Monster : Creature
         }
     }
 
+    public override void OnDead()
+    {
+        base.OnDead();
+
+        int idx = Random.Range(0, Data.DropItemIDList.Count);
+        Item item = Managers.Object.Spawn<Item>(transform.position, Data.DropItemIDList[idx]);
+    }
+
     protected override void UpdateIdleAnimation()
     {
         _animator.Play("Idle");

@@ -16,6 +16,7 @@ public class DataManager
     public Dictionary<int, Data.TileData> TileDataDic { get; private set; } = new Dictionary<int, Data.TileData>();
     public Dictionary<int, Data.SkillData> SkillDataDic { get; private set; } = new Dictionary<int, Data.SkillData>();
     public Dictionary<int, Data.ProjectileData> ProjectileDataDic { get; private set; } = new Dictionary<int, Data.ProjectileData>();
+    public Dictionary<int, Data.ItemData> ItemDataDic { get; private set; } = new Dictionary<int, Data.ItemData>();
 
     public void Init()
     {
@@ -25,6 +26,7 @@ public class DataManager
         TileDataDic = LoadJson<Data.TileDataLoader, int, Data.TileData>("TileData").MakeDict();
         SkillDataDic = LoadJson<Data.SkillDataLoader, int, Data.SkillData>("SkillData").MakeDict();
         ProjectileDataDic = LoadJson<Data.ProjectileDataLoader, int, Data.ProjectileData>("ProjectileData").MakeDict();
+        ItemDataDic = LoadJson<Data.ItemDataLoader, int, Data.ItemData>("ItemData").MakeDict();
     }
 
     Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>

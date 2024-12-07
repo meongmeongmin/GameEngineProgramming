@@ -32,6 +32,12 @@ public class Boss : Monster
             State = ECreatureState.Idle;
     }
 
+    public override void OnDead()
+    {
+        base.OnDead();
+
+    }
+
     protected override void UpdateIdleAnimation()
     {
         _animator.Play("Idle");

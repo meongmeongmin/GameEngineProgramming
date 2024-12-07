@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "DataID": 50001,
+      "Name": "Key",
+      "ItemType": 1,
+      "SpriteName": "Items_0"
+    },
+    {
+      "DataID": 50002,
+      "Name": "Life",
+      "ItemType": 2,
+      "SpriteName": "Items_2"
+    }
+  ]
+}

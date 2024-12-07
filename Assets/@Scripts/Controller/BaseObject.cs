@@ -37,6 +37,11 @@ public class BaseObject : MonoBehaviour
         return true;
     }
 
+    public virtual void OnHeal(float healAmount)
+    {
+
+    }
+
     public virtual void OnDamaged(Creature owner, SkillBase skill)
     {
 

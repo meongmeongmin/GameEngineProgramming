@@ -100,6 +100,13 @@ public class Creature : BaseObject
         State = ECreatureState.Idle;
     }
 
+    public override void OnHeal(float healAmount)
+    {
+        base.OnHeal(healAmount);
+        Hp = Mathf.Min(Hp + healAmount, MaxHp);
+        Debug.Log($"힐링! 현재 Hp: {Hp}");
+    }
+
     public override void OnDamaged(Creature owner, SkillBase skill)
     {
         base.OnDamaged(owner, skill);
@@ -176,8 +183,8 @@ public class Creature : BaseObject
     IEnumerator CoUpdateDead()
     {
         RigidBody.gravityScale = 1;
-        RigidBody.AddForce(new Vector2(0, 5), ForceMode2D.Impulse);
-        RigidBody.velocity = Vector2.zero;
+        RigidBody.AddForce(Vector2.up * 5f, ForceMode2D.Impulse);
+        RigidBody.velocity = Vector2.one;
 
         yield return new WaitForSeconds(0.5f);
         Managers.Object.Despawn(this);

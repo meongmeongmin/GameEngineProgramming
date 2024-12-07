@@ -79,6 +79,7 @@ namespace Data
     {
         public int DropExp;
         public float SearchScope;
+        public List<int> DropItemIDList;
     }
 
     [Serializable]
@@ -164,6 +165,29 @@ namespace Data
             Dictionary<int, ProjectileData> dict = new Dictionary<int, ProjectileData>();
             foreach (ProjectileData projectile in projectiles)
                 dict.Add(projectile.DataID, projectile);
+            return dict;
+        }
+    }
+
+    [Serializable]
+    public class ItemData
+    {
+        public int DataID;
+        public string Name;
+        public Define.EItemType ItemType;
+        public string SpriteName;
+    }
+
+    [Serializable]
+    public class ItemDataLoader : ILoader<int, ItemData>
+    {
+        public List<ItemData> items = new List<ItemData>();
+
+        public Dictionary<int, ItemData> MakeDict()
+        {
+            Dictionary<int, ItemData> dict = new Dictionary<int, ItemData>();
+            foreach (ItemData item in items)
+                dict.Add(item.DataID, item);
             return dict;
         }
     }
