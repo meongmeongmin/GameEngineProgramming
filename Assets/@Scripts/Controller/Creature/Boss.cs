@@ -27,10 +27,7 @@ public class Boss : Monster
         float dist = Vector2.Distance(transform.position, Target.transform.position);
 
         if (dist < _searchScope)
-        {
             State = ECreatureState.Skill;
-            Skills.DefaultSkill.DoSkill();
-        }
         else
             State = ECreatureState.Idle;
     }
@@ -43,5 +40,10 @@ public class Boss : Monster
     protected override void UpdateSkillAnimation()
     {
         _animator.Play("Jump");
+    }
+
+    public void Attack()
+    {
+        Skills.DefaultSkill.DoSkill();
     }
 }
