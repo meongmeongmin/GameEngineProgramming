@@ -15,6 +15,7 @@ public class ExitInteraction : ITileInteraction
         Player player = target as Player;
         if (player != null)
         {
+            Managers.Game.SaveGame();
             switch (Managers.Scene.CurrentScene.Scene)
             {
                 case EScene.IslandScene:

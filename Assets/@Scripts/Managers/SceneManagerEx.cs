@@ -12,7 +12,7 @@ public class SceneManagerEx
         SceneManager.LoadScene(GetSceneName(type));
     }
 
-    private string GetSceneName(Define.EScene type)
+    public string GetSceneName(Define.EScene type)
     {
         return System.Enum.GetName(typeof(Define.EScene), type);
     }

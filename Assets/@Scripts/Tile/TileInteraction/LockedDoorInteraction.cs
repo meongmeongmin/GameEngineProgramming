@@ -10,13 +10,16 @@ public class LockedDoorInteraction : ITileInteraction
 
     public bool CanInteract()
     {
-        // TODO: 특정 조건(예: 열쇠 소지 여부) 충족 시 문이 열리도록 설정
+        if (Managers.Game.Inventory.UseItem(EItemType.Key))
+            IsLocked = false;
+
         return !IsLocked;
     }
 
     public void HandleOnCollisionEvent(BaseObject target)
     {
-        if (CanInteract())
+        Player player = target as Player;
+        if (player != null && CanInteract())
             Managers.Object.Despawn(_tile);
     }
 

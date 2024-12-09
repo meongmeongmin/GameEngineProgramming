@@ -16,6 +16,7 @@ public class DungeonScene : BaseScene
         Managers.Map.StageTransition.SetInfo();
 
         Player player = Managers.Object.Spawn<Player>(new Vector3(-0.5f, -4.5f), PLAYER_ID);
+        Managers.Map.StageTransition.CheckMapChanged(player.transform.position);
         CameraController camera = Camera.main.GetOrAddComponent<CameraController>();
         camera.Target = player;
     }

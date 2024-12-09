@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using static Define;
-using static UnityEngine.GraphicsBuffer;
 
 public class Item : BaseObject
 {
@@ -37,7 +35,7 @@ public class Item : BaseObject
 
         if (ItemType == EItemType.Key)
         {
-            // TODO: 열쇠 획득
+            Managers.Game.Inventory.AddItem(EItemType.Key);
         }
         else if (ItemType == EItemType.Life)
         {

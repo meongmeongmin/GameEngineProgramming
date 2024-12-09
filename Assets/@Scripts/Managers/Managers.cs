@@ -13,11 +13,13 @@ public class Managers : MonoBehaviour
     SceneManagerEx _scene = new SceneManagerEx();
     ObjectManager _object = new ObjectManager();
     MapManager _map = new MapManager();
+    GameManager _game = new GameManager();
     public static DataManager Data { get { return Instance?._data; } }
     public static ResourceManager Resource { get { return Instance?._resource; } }
     public static SceneManagerEx Scene { get { return Instance?._scene; } }
     public static ObjectManager Object { get { return Instance?._object; } }
     public static MapManager Map { get { return Instance?._map; } }
+    public static GameManager Game { get { return Instance?._game; } }
 
     public static void Init()
     {

@@ -8,6 +8,8 @@ public class TreasureChestInteraction : ITileInteraction
     EffectTile _tile;
     public bool IsClosed;
 
+    Sprite _opendSprite;
+
     public bool CanInteract()
     {
         return IsClosed;
@@ -15,9 +17,10 @@ public class TreasureChestInteraction : ITileInteraction
 
     public void HandleOnCollisionEvent(BaseObject target)
     {
-        if (CanInteract())
+        Player player = target as Player;
+        if (player != null && CanInteract())
         {
-            _tile.SpriteRenderer.sprite = Util.FindTileMapsSprite("Items_4");   // 열린 상자 스프라이트
+            _tile.SpriteRenderer.sprite = _opendSprite;  // 열린 상자 스프라이트
             Item key = Managers.Object.Spawn<Item>(_tile.transform.position, KEY_ID);
             IsClosed = false;
         }
@@ -27,5 +30,6 @@ public class TreasureChestInteraction : ITileInteraction
     {
         _tile = tile;
         IsClosed = true;
+        _opendSprite = Util.FindTileMapsSprite("Items_4");
     }
 }

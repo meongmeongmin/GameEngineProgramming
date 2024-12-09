@@ -26,7 +26,6 @@ public class Stage : MonoBehaviour
     List<BaseObject> _spawnObjects = new List<BaseObject>();
     public List<ObjectSpawnInfo> SpawnInfos = new List<ObjectSpawnInfo>();
 
-    public ObjectSpawnInfo ExitSpawnInfo;
     public ObjectSpawnInfo WaypointSpawnInfo;
 
     public int StageIndex { get; set; }
@@ -153,9 +152,6 @@ public class Stage : MonoBehaviour
 
                 Vector3 worldPos = Managers.Map.CellToWorld(cellPos);
                 ObjectSpawnInfo info = new ObjectSpawnInfo(tile.Name, tile.DataID, worldPos, tile.ObjectType);
-
-                if (tile.ObjectType == EObjectType.Tile)
-                    ExitSpawnInfo = info;
 
                 if (tile.ObjectType == EObjectType.Waypoint)
                     WaypointSpawnInfo = info;
