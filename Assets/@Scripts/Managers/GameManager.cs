@@ -29,13 +29,13 @@ public class ItemSaveData
 
 public class Inventory
 {
-    public int Keys { get; set; } = 0;
+    public int KeyCount { get; set; } = 0;
 
     public bool UseItem(EItemType type)
     {
-        if (type == EItemType.Key && Keys > 0)
+        if (type == EItemType.Key && KeyCount > 0)
         {
-            Keys--;
+            KeyCount--;
             return true;
         }
 
@@ -45,7 +45,7 @@ public class Inventory
     public void AddItem(EItemType type)
     {
         if (type == EItemType.Key)
-            Keys++;
+            KeyCount++;
     }
 }
 

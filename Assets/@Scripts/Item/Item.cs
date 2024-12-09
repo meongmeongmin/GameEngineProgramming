@@ -56,8 +56,9 @@ public class Item : BaseObject
 
         while (elapsedTime < duration)
         {
-            if (RigidBody == null)
-                yield break;
+            Vector3 dir = target.transform.position - transform.position;
+            if (dir.magnitude < 0.1f)
+                break;
 
             elapsedTime += Time.deltaTime;
             Vector3 nextPosition = Vector3.Lerp(transform.position, target.transform.position, elapsedTime / duration);

@@ -4,20 +4,22 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using static Define;
 
-public struct ObjectSpawnInfo
+public class ObjectSpawnInfo
 {
-    public ObjectSpawnInfo(string name, int dataID, Vector3 worldPos, EObjectType type)
+    public string Name;
+    public int DataID;
+    public Vector3 WorldPos;
+    public EObjectType ObjectType;
+    public ECreatureState State;
+    
+    public ObjectSpawnInfo(string name, int dataID, Vector3 worldPos, EObjectType type, ECreatureState state)
     {
         Name = name;
         DataID = dataID;
         WorldPos = worldPos;
         ObjectType = type;
+        State = state;
     }
-
-    public string Name;
-    public int DataID;
-    public Vector3 WorldPos;
-    public EObjectType ObjectType;
 }
 
 public class Stage : MonoBehaviour
@@ -92,10 +94,6 @@ public class Stage : MonoBehaviour
         {
             Vector3 worldPos = info.WorldPos;
 
-            // 타일 크기를 고려하여 타일 중심으로 조정
-            Vector3 tileOffset = TilemapObject.layoutGrid.cellSize * 0.5f; // 타일 크기의 절반
-            worldPos += tileOffset;
-
             switch (info.ObjectType)
             {
                 case EObjectType.Monster:
@@ -104,10 +102,14 @@ public class Stage : MonoBehaviour
                         monster = Managers.Object.Spawn<Monster>(worldPos, info.DataID, "Golem");
                     else
                         monster = Managers.Object.Spawn<Monster>(worldPos, info.DataID);
+
+                    monster.InitPosition = worldPos;
                     _spawnObjects.Add(monster);
                     break;
+
                 case EObjectType.Tile:
                     EffectTile tile = Managers.Object.Spawn<EffectTile>(worldPos, info.DataID);
+                    tile.InitPosition = worldPos;
                     _spawnObjects.Add(tile);
                     break;
             }
@@ -151,10 +153,20 @@ public class Stage : MonoBehaviour
                     continue;
 
                 Vector3 worldPos = Managers.Map.CellToWorld(cellPos);
-                ObjectSpawnInfo info = new ObjectSpawnInfo(tile.Name, tile.DataID, worldPos, tile.ObjectType);
+                // 타일 크기를 고려하여 타일 중심으로 조정
+                Vector3 tileOffset = TilemapObject.layoutGrid.cellSize * 0.5f; // 타일 크기의 절반
+                worldPos += tileOffset;
 
-                if (tile.ObjectType == EObjectType.Waypoint)
-                    WaypointSpawnInfo = info;
+                ObjectSpawnInfo info;
+                
+                if (tile.ObjectType == EObjectType.Monster)
+                    info = new ObjectSpawnInfo(tile.Name, tile.DataID, worldPos, tile.ObjectType, ECreatureState.Idle);
+                else
+                {
+                    info = new ObjectSpawnInfo(tile.Name, tile.DataID, worldPos, tile.ObjectType, ECreatureState.None);
+                    if (tile.ObjectType == EObjectType.Waypoint)
+                        WaypointSpawnInfo = info;
+                }
 
                 SpawnInfos.Add(info);
             }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static Define;
 
@@ -104,8 +105,54 @@ public class Monster : Creature
         else
             Managers.Sound.Play(ESound.Effect, "se_killed");
 
-        int idx = Random.Range(0, Data.DropItemIDList.Count);
-        Item item = Managers.Object.Spawn<Item>(transform.position, Data.DropItemIDList[idx]);
+        // SpawnInfos에서 본인 정보 중 상태를 변경
+        ObjectSpawnInfo matchingInfo = Managers.Map.StageTransition.CurrentStage.SpawnInfos.FirstOrDefault(info => info.ObjectType == ObjectType && info.WorldPos == InitPosition);
+        if (matchingInfo != null)
+            matchingInfo.State = ECreatureState.Dead;
+
+        CreateDropItem();
+    }
+
+    void CreateDropItem()
+    {
+        // 열쇠가 필요하면 바로 생성
+        if (Data.DropItemIDList.Contains(KEY_ID) && IsKeyRequired())
+        {
+            Managers.Object.Spawn<Item>(transform.position, KEY_ID);
+            return;
+        }
+
+        int id = KEY_ID; 
+        
+        if (IsKeyPresent())
+        {
+            // KEY_ID를 제외한 아이템 선택
+            var nonKeyItems = Data.DropItemIDList.Where(item => item != KEY_ID).ToList();
+            id = nonKeyItems[Random.Range(0, nonKeyItems.Count)];
+        }
+        else
+        {
+            // KEY_ID 포함, 랜덤으로 선택
+            id = Data.DropItemIDList[Random.Range(0, Data.DropItemIDList.Count)];
+        }
+
+        Managers.Object.Spawn<Item>(transform.position, id);
+    }
+
+    bool IsKeyRequired()
+    {
+        if (IsKeyPresent())
+            return false;
+
+        var spawnInfos = Managers.Map.StageTransition.CurrentStage.SpawnInfos;
+        int monsterCount = spawnInfos.Count(info => info.ObjectType == ObjectType && info.State != ECreatureState.Dead);    // 살아있는 몬스터 수
+            
+        return monsterCount <= 1;
+    }
+
+    bool IsKeyPresent()
+    {
+        return Managers.Game.Inventory.KeyCount > 0 || Managers.Object.Items.Any(item => item.ItemType == EItemType.Key);
     }
 
     protected override void UpdateIdleAnimation()

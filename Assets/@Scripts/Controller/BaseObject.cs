@@ -15,6 +15,8 @@ public class BaseObject : MonoBehaviour
     //public Vector3 CenterPosition { get { return transform.position + Vector3.up * ColliderRadius; } }
     public Vector3 CenterPosition { get { return Collider.bounds.center; } }
 
+    public Vector3 InitPosition { get; set; }   // 처음 생성된 위치
+
     public int DataID { get; set; }
 
     bool _init = false;

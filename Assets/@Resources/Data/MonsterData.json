@@ -4,6 +4,7 @@
       "DropExp": 1,
       "SearchScope": 4.0,
       "DropItemIDList": [
+        50001,
         50002
       ],
       "DataID": 10001,
@@ -25,7 +26,6 @@
       "DropExp": 1,
       "SearchScope": 7.0,
       "DropItemIDList": [
-        50001,
         50002
       ],
       "DataID": 10011,

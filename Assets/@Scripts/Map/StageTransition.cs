@@ -70,7 +70,6 @@ public class StageTransition : MonoBehaviour
 
         LoadMapsAround(newMapIndex);
         UnloadOtherMaps(newMapIndex);
-
     }
 
     void LoadMapsAround(int mapIndex)   // 현재 스테이지와 인접한 스테이지를 로드
