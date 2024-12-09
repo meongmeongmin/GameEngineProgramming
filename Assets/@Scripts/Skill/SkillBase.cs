@@ -56,14 +56,16 @@ public class SkillBase : MonoBehaviour
 
     public IEnumerator CoKnockback(BaseObject target, Vector2 direction, float distance, float duration)
     {
+        if (target.RigidBody == null)
+            yield break;
+
         // 보스는 넉백 면역
         Boss boss = target as Boss;
         if (boss != null)
+        {
+            boss.RigidBody.velocity = Vector2.zero;
             yield break;
-
-        Rigidbody2D rb = target.GetComponent<Rigidbody2D>();
-        if (rb == null)
-            yield break;
+        }
 
         Vector3 startPosition = target.transform.position;
         Vector3 targetPosition = startPosition + (Vector3)(direction * distance);
@@ -72,17 +74,17 @@ public class SkillBase : MonoBehaviour
 
         while (elapsedTime < duration)
         {
-            if (rb == null)
+            if (target.RigidBody == null)
                 yield break;
 
             elapsedTime += Time.deltaTime;
             Vector3 nextPosition = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
-            rb.MovePosition(nextPosition);
+            target.RigidBody.MovePosition(nextPosition);
 
             yield return null;
         }
 
-        rb.velocity = Vector2.zero;
+        target.RigidBody.velocity = Vector2.zero;
     }
 
     protected virtual void GenerateProjectile(Creature owner, Vector3 spawnPos, Vector3 dir, string name = null)

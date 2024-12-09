@@ -19,7 +19,6 @@ public class Boss : Monster
         Target = Managers.Object.Player;
         if (Target == null)
         {
-            Debug.Log("플레이어를 찾지 못했다");
             State = ECreatureState.Idle;
             return;
         }
@@ -45,7 +44,7 @@ public class Boss : Monster
 
     protected override void UpdateSkillAnimation()
     {
-        _animator.Play("Jump");
+        _animator.Play("Skill");
     }
 
     public void Attack()

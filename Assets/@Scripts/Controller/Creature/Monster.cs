@@ -37,7 +37,6 @@ public class Monster : Creature
         Target = Managers.Object.Player;
         if (Target == null)
         {
-            Debug.Log("플레이어를 찾지 못했다");
             State = ECreatureState.Idle;
             return;
         }
