@@ -14,6 +14,7 @@ public class DungeonScene : BaseScene
 
         Managers.Map.LoadMap("DungeonMap");
         Managers.Map.StageTransition.SetInfo();
+        Managers.Sound.Play(ESound.Bgm, "BGM_game_00");
 
         Player player = Managers.Object.Spawn<Player>(new Vector3(-0.5f, -4.5f), PLAYER_ID);
         Managers.Map.StageTransition.CheckMapChanged(player.transform.position);

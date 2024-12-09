@@ -99,6 +99,12 @@ public class Monster : Creature
     {
         base.OnDead();
 
+        Boss boss = this as Boss;
+        if (boss != null)
+            Managers.Sound.Play(ESound.Effect, "se_bosskilled");
+        else
+            Managers.Sound.Play(ESound.Effect, "se_killed");
+
         int idx = Random.Range(0, Data.DropItemIDList.Count);
         Item item = Managers.Object.Spawn<Item>(transform.position, Data.DropItemIDList[idx]);
     }

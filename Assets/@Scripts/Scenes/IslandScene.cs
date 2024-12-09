@@ -14,6 +14,7 @@ public class IslandScene : BaseScene
 
         Managers.Map.LoadMap("IslandMap");
         Managers.Map.StageTransition.SetInfo();
+        Managers.Sound.Stop(ESound.Bgm);
 
         Player player = Managers.Object.Spawn<Player>(Vector3.zero, PLAYER_ID);
         CameraController camera = Camera.main.GetOrAddComponent<CameraController>();

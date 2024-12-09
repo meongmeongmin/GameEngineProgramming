@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 public class StageTransition : MonoBehaviour
 {
@@ -64,9 +65,12 @@ public class StageTransition : MonoBehaviour
     {
         CurrentStageIndex = newMapIndex;
         CurrentStage = Stages[CurrentStageIndex];
+        if (CurrentStage.transform.name == "03_dungeon")
+            Managers.Sound.Play(ESound.Bgm, "BGM_boss");
 
         LoadMapsAround(newMapIndex);
         UnloadOtherMaps(newMapIndex);
+
     }
 
     void LoadMapsAround(int mapIndex)   // 현재 스테이지와 인접한 스테이지를 로드

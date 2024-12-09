@@ -110,6 +110,7 @@ public class Creature : BaseObject
     public override void OnDamaged(Creature owner, SkillBase skill)
     {
         base.OnDamaged(owner, skill);
+        Managers.Sound.Play(ESound.Effect, "se_damage");
 
         float damage;
         if (skill == null)

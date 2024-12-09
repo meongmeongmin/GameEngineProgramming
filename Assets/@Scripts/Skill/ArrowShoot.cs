@@ -2,6 +2,7 @@ using Data;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 public class ArrowShoot : SkillBase
 {
@@ -16,6 +17,7 @@ public class ArrowShoot : SkillBase
             return false;
 
         GenerateProjectile(Owner, Owner.CenterPosition, Util.DirToVector3(Owner.Dir), Data.PrefabLabel);
+        Managers.Sound.Play(ESound.Effect, "se_shoot");
         return true;
     }
 }

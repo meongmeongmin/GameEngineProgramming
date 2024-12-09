@@ -34,6 +34,8 @@ public class Player : Creature
 
     public override void OnDead()
     {
+        Managers.Sound.Stop(ESound.Bgm);
+        Managers.Sound.Play(ESound.Effect, "ME_GameOver");
         base.OnDead();
     }
 

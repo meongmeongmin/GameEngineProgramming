@@ -67,6 +67,7 @@ public class Item : BaseObject
         }
 
         RigidBody.velocity = Vector2.zero;
+        Managers.Sound.Play(ESound.Effect, "se_get");
         Managers.Object.Despawn(this);
     }
 

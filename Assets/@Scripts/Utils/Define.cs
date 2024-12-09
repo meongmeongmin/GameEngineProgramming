@@ -12,6 +12,14 @@ public class Define
         DungeonScene
     }
 
+    public enum ESound
+    {
+        Bgm,
+        SubBgm,
+        Effect,
+        Max,
+    }
+
     public enum EObjectType
     {
         None,

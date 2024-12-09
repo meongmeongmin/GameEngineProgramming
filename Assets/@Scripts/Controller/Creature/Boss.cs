@@ -35,7 +35,7 @@ public class Boss : Monster
     public override void OnDead()
     {
         base.OnDead();
-
+        Managers.Sound.Play(ESound.Effect, "ME_Clear");
     }
 
     protected override void UpdateIdleAnimation()

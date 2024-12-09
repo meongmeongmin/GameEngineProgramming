@@ -20,7 +20,12 @@ public class LockedDoorInteraction : ITileInteraction
     {
         Player player = target as Player;
         if (player != null && CanInteract())
+        {
+            Managers.Sound.Play(ESound.Effect, "se_doorOpen");
             Managers.Object.Despawn(_tile);
+        }
+        else
+            Managers.Sound.Play(ESound.Effect, "se_doorClosed");
     }
 
     public void SetInfo(EffectTile tile)
