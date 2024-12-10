@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: 900fbe9674ebfc04c8ae12404886f58b
   m_SerializeEntries:
   - m_GUID: c9836c0812eedf04c885ae7a68f579e8
-    m_Address: Door
+    m_Address: Door.sprite
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
