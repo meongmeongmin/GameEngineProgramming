@@ -28,14 +28,23 @@ public class Player : Creature
             return;
 
         base.OnDamaged(owner, skill);
+        Managers.Game.UI_GameScene.SetHpRatio(Hp);
+
         Vector3 direction = (transform.position - owner.transform.position).normalized;
         StartCoroutine(CoKnockback(direction, _knockbackDistance, StaggerTime));
+    }
+
+    public override void OnHeal(float healAmount)
+    {
+        base.OnHeal(healAmount);
+        Managers.Game.UI_GameScene.SetHpRatio(Hp);
     }
 
     public override void OnDead()
     {
         Managers.Sound.Stop(ESound.Bgm);
         Managers.Sound.Play(ESound.Effect, "ME_GameOver");
+        Managers.Game.UI_GameScene.GameOver();
         base.OnDead();
     }
 

@@ -29,7 +29,16 @@ public class ItemSaveData
 
 public class Inventory
 {
-    public int KeyCount { get; set; } = 0;
+    int _keyCount = 0;
+    public int KeyCount 
+    {
+        get { return _keyCount; } 
+        protected set
+        {
+            _keyCount = value;
+            Managers.Game.KeyCountChanged?.Invoke(_keyCount);
+        }
+    }
 
     public bool UseItem(EItemType type)
     {
@@ -51,25 +60,30 @@ public class Inventory
 
 public class GameManager
 {
-    GameSaveData _saveData = new GameSaveData();
+    GameSaveData _saveData;
     public GameSaveData SaveData
     { 
         get { return _saveData; } 
         set { _saveData = value; } 
     }
 
-    public Inventory Inventory { get; set; } = new Inventory();
+    public Inventory Inventory { get; set; }
+    public UI_GameScene UI_GameScene { get; set; }
+
+    public Action<int> KeyCountChanged;
 
     public string Path { get { return Application.persistentDataPath + "/SaveData.json"; } }
 
     public void InitGame()  // TODO
     {
-        if (File.Exists(Path))
-            return;
+        _saveData = new GameSaveData();
+        Inventory = new Inventory();
+        //if (File.Exists(Path))
+        //    return;
 
-        string jsonStr = JsonUtility.ToJson(Managers.Game.SaveData);
-        File.WriteAllText(Path, jsonStr);
-        Debug.Log($"Save Game Completed : {Path}");
+        //string jsonStr = JsonUtility.ToJson(Managers.Game.SaveData);
+        //File.WriteAllText(Path, jsonStr);
+        //Debug.Log($"Save Game Completed : {Path}");
     }
 
     public void SaveGame()  // TODO

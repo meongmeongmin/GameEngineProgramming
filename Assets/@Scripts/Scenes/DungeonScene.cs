@@ -20,6 +20,9 @@ public class DungeonScene : BaseScene
         Managers.Map.StageTransition.CheckMapChanged(player.transform.position);
         CameraController camera = Camera.main.GetOrAddComponent<CameraController>();
         camera.Target = player;
+
+        Managers.Game.UI_GameScene = Managers.Resource.Instantiate("UI_GameScene").GetComponent<UI_GameScene>();
+        Managers.Game.UI_GameScene.SetInfo(player);
     }
 
     public override void Clear()

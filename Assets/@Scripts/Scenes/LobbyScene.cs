@@ -22,6 +22,7 @@ public class LobbyScene : BaseScene
             if (count == totalCount)
             {
                 Managers.Data.Init();
+                Managers.Game.InitGame();
                 Invoke("LoadIslandScene", 1.0f);    // 씬 전환 Test
             }
         });
