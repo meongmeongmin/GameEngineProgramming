@@ -36,10 +36,14 @@ public static class Util
     public static Sprite FindTileMapsSprite(string spriteName)
     {
         string name = Regex.Replace(spriteName, "_.*", "");
-        Sprite[] sprites = AssetDatabase.LoadAllAssetsAtPath($"Assets/@Resources/TileMaps/02_sprites/{name}.png")
-                             .OfType<Sprite>()
-                             .ToArray();
-        Sprite spr = sprites.FirstOrDefault(s => s.name == spriteName);
+        //string filePath = Path.Combine(Application.streamingAssetsPath, "TileMaps/02_sprites";
+        //Sprite[] sprites = AssetDatabase.LoadAllAssetsAtPath($"Assets/@Resources/TileMaps/02_sprites/{name}.png")
+        //                     .OfType<Sprite>()
+        //                     .ToArray();
+        //Sprite spr = sprites.FirstOrDefault(s => s.name == spriteName);
+
+        Sprite[] sprites = Resources.LoadAll<Sprite>($"TileMaps/Sprites/{name}");
+        Sprite spr = System.Array.Find(sprites, s => s.name == spriteName);
         return spr;
     }
 }

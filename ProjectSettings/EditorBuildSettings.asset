@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/@Scenes/IslandScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
     path: Assets/@Scenes/LobbyScene.unity
     guid: cd4bd2825b0916b4f8cfa29644d0afc0
+  - enabled: 1
+    path: Assets/@Scenes/IslandScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/@Scenes/DungeonScene.unity
     guid: 5f8bc21b544950e4799b8f89d8de661f
