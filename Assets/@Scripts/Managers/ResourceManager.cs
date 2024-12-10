@@ -17,7 +17,7 @@ public class ResourceManager
 
         if (typeof(T) == typeof(Sprite))
         {
-            //key = $"{key}.sprite";
+            key = $"{key}.sprite";
             if (_resources.TryGetValue(key, out Object tmp))
                 return tmp as T;
         }

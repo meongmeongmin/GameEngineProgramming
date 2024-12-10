@@ -42,6 +42,8 @@ public static class Util
         //                     .ToArray();
         //Sprite spr = sprites.FirstOrDefault(s => s.name == spriteName);
 
+        //Managers.Resource.Load<Sprite>();
+
         Sprite[] sprites = Resources.LoadAll<Sprite>($"TileMaps/Sprites/{name}");
         Sprite spr = System.Array.Find(sprites, s => s.name == spriteName);
         return spr;
