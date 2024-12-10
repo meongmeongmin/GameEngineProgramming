@@ -173,6 +173,9 @@ public class Creature : BaseObject
 
     public IEnumerator CoUpdateSkill()
     {
+        if (ObjectType != EObjectType.Player)
+            yield break;
+
         yield return new WaitForSeconds(0.5f);
         
         if (State != ECreatureState.Dead)

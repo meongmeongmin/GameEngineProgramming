@@ -5,6 +5,8 @@ using static Define;
 
 public class Boss : Monster
 {
+    bool _IsNextPage = false;
+
     public override bool Init()
     {
         base.Init();
@@ -26,9 +28,18 @@ public class Boss : Monster
         float dist = Vector2.Distance(transform.position, Target.transform.position);
 
         if (dist < _searchScope)
+        {
             State = ECreatureState.Skill;
+        }
         else
             State = ECreatureState.Idle;
+    }
+
+    public override void OnDamaged(Creature owner, SkillBase skill)
+    {
+        base.OnDamaged(owner, skill);
+        if (_IsNextPage == false && Hp <= MaxHp * 0.5)
+            _IsNextPage = true;
     }
 
     public override void OnDead()
@@ -36,6 +47,7 @@ public class Boss : Monster
         base.OnDead();
         Managers.Sound.Play(ESound.Effect, "ME_Clear");
         Managers.Game.UI_GameScene.GameClear();
+        Managers.Object.Despawn(Target);
     }
 
     protected override void UpdateIdleAnimation()
@@ -45,7 +57,10 @@ public class Boss : Monster
 
     protected override void UpdateSkillAnimation()
     {
-        _animator.Play("Skill");
+        if (_IsNextPage)
+            _animator.Play("Skill2");
+        else
+            _animator.Play("Skill");
     }
 
     public void Attack()

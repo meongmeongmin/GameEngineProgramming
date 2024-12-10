@@ -8,7 +8,7 @@
       "DamageMultiplier": 1.5,
       "Range": 2.0,
       "CoolTime": 0.0,
-      "StaggerTime": 0.5,
+      "StaggerTime": 0.5
     },
     {
       "DataID": 30011,
@@ -27,7 +27,7 @@
       "PrefabLabel": "Bullet",
       "DamageMultiplier": 1.0,
       "Range": 0.0,
-      "CoolTime": 0.5,
+      "CoolTime": 0.3,
       "StaggerTime": 0.0
     }
   ]
